@@ -1,0 +1,43 @@
+.wrapper{
+  background: var(--welcome-bg-color);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid red;
+  justify-content: space-between;
+  .title{
+    display: flex;
+    border: 1px solid black;
+    flex-direction: column;
+    padding-top: 7.12vh;
+    align-items: center;
+    margin-bottom:3.456vh;
+  }
+  .icon{
+    height: 7.45vh;
+  }
+  .titleText{
+    font-size: 32px;
+    margin-top: 1.08vh;
+    color: #D4D4EE;
+  }
+  .footerText{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid red;
+    font-size: 32px;
+    color: white;
+    margin: 4.1vh 3.74vw 2.81vh;
+  }
+}
+.bodyText{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border: 1px solid blue;
+  margin:0 3.75vw;
+  background:#FFFFFF;
+  border-radius:16px;
+}
