@@ -37,3 +37,22 @@
   background:#FFFFFF;
   border-radius:16px;
 }
+
+.slide_fade_enter_active,
+.slide_fade_leave_active {
+  position: absolute;
+  transition: all 3s ease-in;
+}
+
+.slide_fade_enter_from {
+  opacity: 0;
+}
+.slide_fade_enter_to{
+  opacity: 1;
+}
+.slide_fade_leave_from{
+  opacity: 1;
+}
+.slide_fade_leave_to {
+  opacity: 0;
+}
