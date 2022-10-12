@@ -1,21 +1,3 @@
-.wrapper{
-
-}
-.headerText{
-  background: linear-gradient(180deg, #5C33BE 0%, #8F4CD7 100%);
-  height:var(--startpage-header-text-height);
-  display: flex;
-  align-items: center;
-  padding: 0 5.61vw;
-  .titleText{
-    color: #FFFFFF;
-    font-size: 24px;
-    margin-left: 5.03vw;
-  }
-  .titleIcon{
-
-  }
-}
 .bodyText{
   display: flex;
   flex-direction: column;

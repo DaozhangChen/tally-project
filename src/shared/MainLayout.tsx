@@ -1,8 +1,5 @@
 import {defineComponent} from "vue";
-import s from "../view/StartPage.module.scss";
-import menu from "../assets/icons/menu.svg";
-import pig from "../assets/icons/pig.svg";
-import add from "../assets/icons/add.svg";
+import s from "./MainLayout.module.scss";
 
 export const MainLayout=defineComponent({
     setup:(props,context)=>{

@@ -1,0 +1,56 @@
+.wrapper{
+  position: absolute;
+  top:var(--sidebar-away-top-heigth);
+  left: 0;
+  display: flex;
+  z-index: var(--sidebar-mask-z-index);
+
+}
+
+.mainBar{
+  width: 70vw;
+  height: calc(100vh - var(--sidebar-away-top-heigth));
+  display: flex;
+  flex-direction: column;
+  justify-items: stretch;
+}
+
+.mask{
+  width: 30vw;
+  background:rgba(0,0,0,0.7);
+  z-index: var(--sidebar-mask-z-index);
+}
+
+.userTitle{
+  background: #5C33BE;
+  padding: 32px 0 44px 16px;
+  height:14vh;
+  .userText{
+    color: #FFFFFF;
+    font-size: 24px;
+  }
+  .underUserText{
+    margin-top: 12px;
+    color:#CEA1FF ;
+    font-size: 16px;
+  }
+}
+
+.listClass{
+  background:#FFFFFF ;
+  height:83.5vh;
+  padding: 2px 0 0 16px;
+  .miniIcon{
+    width: 32px;
+  }
+  li{
+    display: flex;
+    align-items: center;
+    margin-top: 28px;
+    p{
+      margin-left: 25px;
+      font-size: 20px;
+    }
+  }
+
+}

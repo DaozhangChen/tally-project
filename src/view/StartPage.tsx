@@ -2,9 +2,9 @@ import {defineComponent} from "vue";
 import menu from '../assets/icons/menu.svg'
 import pig from '../assets/icons/pig.svg'
 import s from './StartPage.module.scss'
-import add from '../assets/icons/add.svg'
 import {MainLayout} from "../shared/MainLayout";
 import {FloatButton} from "../shared/FloatButton";
+import {Menu} from "../shared/Menu";
 
 export const StartPage=defineComponent({
     setup:()=> {
@@ -12,7 +12,7 @@ export const StartPage=defineComponent({
             <div>
                 <MainLayout>
                     {{
-                        icon:()=><img src={menu} alt='一个菜单' class={s.titleIcon}/>,
+                        icon:()=><Menu />,
                         title:()=>'山竹记账',
                         default:()=>
                             <div>
