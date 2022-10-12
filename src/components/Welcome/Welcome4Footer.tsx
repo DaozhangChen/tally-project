@@ -7,7 +7,7 @@ export const Welcome4Footer=defineComponent({
         return()=>(
             <>
                 <RouterLink to='/start' class={s.fake}>跳过</RouterLink>
-                <RouterLink to='/start'>完成</RouterLink>
+                <RouterLink to='/start'>开始记账</RouterLink>
                 <RouterLink to='/start' class={s.fake}>跳过</RouterLink>
             </>
         )

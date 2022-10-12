@@ -8,6 +8,8 @@ import {Welcome3} from "../components/Welcome/Welcome3";
 import {Welcome4} from "../components/Welcome/Welcome4";
 import {Welcome3Footer} from "../components/Welcome/Welcome3Footer";
 import {Welcome4Footer} from "../components/Welcome/Welcome4Footer";
+import {StartPage} from "../view/StartPage";
+import {textPage} from "../shared/textPage";
 
 export const routes:RouteRecordRaw[] = [
     {path:'/',redirect:'/welcome'},
@@ -18,4 +20,5 @@ export const routes:RouteRecordRaw[] = [
         {path:'3',components:{main:Welcome3,footer:Welcome3Footer}},
         {path:'4',components:{main:Welcome4,footer:Welcome4Footer}},
         ]},
+    {path:'/start',component:StartPage}
 ]
