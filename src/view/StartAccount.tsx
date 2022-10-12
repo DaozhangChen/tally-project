@@ -2,11 +2,11 @@ import {defineComponent} from "vue";
 import {MainLayout} from "../shared/MainLayout";
 import comeback from '../assets/icons/comeback.svg'
 import s from  './StartAccount.module.scss'
+import {Calculator} from "../shared/Calculator";
 
 export const StartAccount=defineComponent({
     setup:()=>{
         return()=>(
-            <div>
                 <MainLayout>
                     {{
                         icon:()=><img src={comeback}/>,
@@ -23,14 +23,12 @@ export const StartAccount=defineComponent({
                                 </ul>
                                 <div>数据</div>
                                 <div>
-                                    <div>日期选择器</div>
-                                    <div>计算器</div>
+                                    <Calculator />
                                 </div>
                             </div>
                         )
                     }}
                 </MainLayout>
-            </div>
         )
     }
 })
