@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+*::before, *::after{
+  box-sizing: border-box;
+}
 h1,h2,h3,h4,h5,h6{
   font-weight: normal;
 }
@@ -16,4 +19,7 @@ button{
   padding: 0;
   border: none;
   outline: none;
+}
+li{
+  list-style: none;
 }

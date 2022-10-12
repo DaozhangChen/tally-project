@@ -5,9 +5,17 @@ import s from './StartPage.module.scss'
 import {MainLayout} from "../shared/MainLayout";
 import {FloatButton} from "../shared/FloatButton";
 import {Menu} from "../shared/Menu";
+import {useRouter} from "vue-router";
 
 export const StartPage=defineComponent({
     setup:()=> {
+        const router=useRouter()
+        const startAccount=()=>{
+            router.push('/account').then(
+                (response)=>{return response},
+                (error)=>{throw error}
+            )
+        }
         return () => (
             <div>
                 <MainLayout>
@@ -18,7 +26,7 @@ export const StartPage=defineComponent({
                             <div>
                                 <main class={s.bodyText}>
                                     <img src={pig} alt='一只猪' class={s.bodyIcon}/>
-                                    <button class={s.bodyButton}>开始记账</button>
+                                    <button class={s.bodyButton} onClick={startAccount}>开始记账</button>
                                 </main>
                                 <FloatButton />
                             </div>
