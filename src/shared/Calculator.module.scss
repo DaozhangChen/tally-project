@@ -12,8 +12,17 @@
     height: 30px;
   }
   .datePicker{
-    display: flex;
-    align-items: center;
+
+    .miniDatePicker{
+      display: flex;
+      align-items: center;
+      .showTime{
+        margin-left: 10px;
+        font-size: 18px;
+        margin-top: 4px;
+        color: #999999;
+      }
+    }
   }
   .AmountNumber{
     font-size: 20px;

@@ -1,9 +1,16 @@
 import {defineComponent, ref} from "vue";
 import s from './Calculator.module.scss'
 import dateIcon from '../assets/icons/date.svg'
+import {DatetimePicker, Popup} from "vant/es";
+import 'vant/es/datetime-picker/style'
+import 'vant/es/popup/style'
+import {Time} from "./time";
+
 
 export const Calculator=defineComponent({
     setup:()=>{
+
+        //计算器输入规则
         const appendText = (n: number | string) => {
             const nString = n.toString()
             const dotIndex = refAmount.value.indexOf('.')
@@ -53,14 +60,35 @@ export const Calculator=defineComponent({
                 pressNumber.value=null
             },200)
         }
-
         const refAmount = ref('')
+
+        //时间选择器与弹出层
+        const refShow=ref(false)
+        const controlShow=()=>{
+            refShow.value= !refShow.value
+        }
+        const hideDatePicker=()=>refShow.value=false
+        const refTime=ref(new Time().format())
+        const setTime=(date:Date)=>{
+            refTime.value=new Time(date).format()
+            hideDatePicker()
+        }
         return ()=>(
             <div class={s.wrapper}>
                 <div class={s.dateAndAmount}>
-                    <div class={s.datePicker}>
-                        <img src={dateIcon} alt='一本日历' class={s.dateIcon}/>
-                        <span>时间</span>
+                    <div class={s.datePicker} >
+                        <div onClick={controlShow} class={s.miniDatePicker}>
+                        <img src={dateIcon} alt='一本日历' class={s.dateIcon} />
+                        <span class={s.showTime}>{refTime.value}</span>
+                        </div>
+                        <Popup v-model:show={refShow.value} position='bottom'>
+                            <DatetimePicker title='选择时间'
+                                            modelValue={new Date(refTime.value)}
+                                            type='date'
+                                            onCancel={hideDatePicker}
+                                            onConfirm={setTime}
+                            />
+                        </Popup>
                     </div>
                     <span class={s.AmountNumber}>{refAmount.value}</span>
                 </div>
