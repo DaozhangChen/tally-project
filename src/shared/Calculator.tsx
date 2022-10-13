@@ -55,7 +55,6 @@ export const Calculator=defineComponent({
         const pressNumber=ref(null)
         const press=(e:any)=>{
             pressNumber.value= e.target.innerText
-            console.log(pressNumber.value)
             setTimeout(()=>{
                 pressNumber.value=null
             },200)

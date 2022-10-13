@@ -7,17 +7,18 @@
 
 .itemList{
   position: absolute;
-  transform: translateY(4.9vh);
+  transform: translateY(calc(9.61vh + 40px));
   width: 100vw;
-  max-height: 420px;
+  top: 0;
+  height: calc(100vh - 40px - 9.61vh - 292px); //减掉其他的东西
   overflow: scroll;
 }
 
 .tabs{
   background: #8F4CD6;
   display: flex;
-  height: 4.9vh;
-  justify-content: center;
+  height: 40px;
+  justify-content:center;
   align-items: center;
 
   li{
