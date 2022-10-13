@@ -5,6 +5,14 @@
   justify-content: space-between;
 }
 
+.itemList{
+  position: absolute;
+  transform: translateY(4.9vh);
+  width: 100vw;
+  max-height: 420px;
+  overflow: scroll;
+}
+
 .tabs{
   background: #8F4CD6;
   display: flex;

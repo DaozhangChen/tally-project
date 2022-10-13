@@ -3,6 +3,7 @@ import {MainLayout} from "../shared/MainLayout";
 import comeback from '../assets/icons/comeback.svg'
 import s from  './StartAccount.module.scss'
 import {Calculator} from "../shared/Calculator";
+import {ItemList} from "../shared/ItemList";
 
 export const StartAccount=defineComponent({
     setup:()=>{
@@ -21,7 +22,9 @@ export const StartAccount=defineComponent({
                                         收入
                                     </li>
                                 </ul>
-                                <div>数据</div>
+                                <div class={s.itemList}>
+                                    <ItemList />
+                                </div>
                                 <div>
                                     <Calculator />
                                 </div>
