@@ -5,6 +5,9 @@ import s from './AdvertisingPage.module.scss'
 
 export const AdvertisingPage=defineComponent({
     setup:()=>{
+        const skipFeatures=()=>{
+            localStorage.setItem('skipFeatures','yes')
+        }
         return ()=>(
             <>
             <div class={s.wrapper}>
@@ -27,7 +30,7 @@ export const AdvertisingPage=defineComponent({
                   }
               </RouterView>
             </main>
-            <footer class={s.footerText}>
+            <footer class={s.footerText} onClick={skipFeatures}>
               <RouterView name='footer' />
             </footer>
             </div>

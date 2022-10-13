@@ -9,12 +9,16 @@ import {Welcome4} from "../components/Welcome/Welcome4";
 import {Welcome3Footer} from "../components/Welcome/Welcome3Footer";
 import {Welcome4Footer} from "../components/Welcome/Welcome4Footer";
 import {StartPage} from "../view/StartPage";
-import {textPage} from "../shared/textPage";
 import {StartAccount} from "../view/StartAccount";
+import {TagCreatePage} from "../components/Tag/TagCreate";
 
 export const routes:RouteRecordRaw[] = [
     {path:'/',redirect:'/welcome'},
-    {path:'/welcome',component: AdvertisingPage,children:[
+    {path:'/welcome',component: AdvertisingPage,
+        beforeEnter:(_to,_from,next)=>{
+            localStorage.getItem('skipFeatures')==='yes' ? next('/start') : next()
+        },
+        children:[
         {path:'',redirect:'/welcome/1'},
         {path:'1',components:{main:Welcome1,footer:Welcome1Footer}},
         {path:'2',components:{main:Welcome2,footer:Welcome2Footer}},
@@ -22,5 +26,6 @@ export const routes:RouteRecordRaw[] = [
         {path:'4',components:{main:Welcome4,footer:Welcome4Footer}},
         ]},
     {path:'/start',component:StartPage},
-    {path:'/account',component:StartAccount}
+    {path:'/account',component:StartAccount},
+    {path:'/tagCreate',component:TagCreatePage}
 ]

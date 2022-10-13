@@ -17,8 +17,8 @@ export const StartAccount=defineComponent({
                         default:()=>(
                             <div class={s.wrapper}>
                                 <Tabs v-model:selected={selectedName.value}>
-                                    <Tab text='支出' name='expend'>支出</Tab>
-                                    <Tab text='收入' name='income' >收入</Tab>
+                                    <Tab text='支出' name='expend' />
+                                    <Tab text='收入' name='income'  />
                                 </Tabs>
                                 <div class={s.itemList}>
                                     <ItemList />

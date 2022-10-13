@@ -38,7 +38,7 @@ export const Tab =defineComponent({
     },
     setup:(props,context)=>{
         return ()=>(
-            <div>{context.slots.default?.()}</div>
+            <div />
         )
     }
 })
