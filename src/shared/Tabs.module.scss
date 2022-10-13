@@ -1,0 +1,36 @@
+.wrapper{
+  background: #8F4CD6;
+  color: #FFFFFF;
+}
+.tabClass{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  li{
+    font-size: 16px;
+  }
+}
+
+.normal{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.selected{
+  position: relative;
+  &::after{
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #C8B1FF;
+  }
+}
