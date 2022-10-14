@@ -28,6 +28,8 @@
   }
   .blank{
     font-size: 14px;
+    height: 20px;
+    color: red;
   }
 }
 
@@ -52,6 +54,7 @@
 }
 
 .secondBlank{
+  color: red;
   position: relative;
   transform: translateX(17px) translateY(-20px);
   width:80%;

@@ -44,7 +44,7 @@ export const IconList =defineComponent({
             return emojiListTitle
                 .map(nav=>emojiList
                     .find(iconList => iconList[0]===nav)?.[1]
-                    .map( icon => <li class={props.modelValue===icon ? s.selected:''}
+                    .map( icon => <li class={props.modelValue === icon ? s.selectIcon:''}
                         onClick={()=>{refSelectIcon(icon)}}>
                         {icon}
                     </li>))
@@ -54,7 +54,7 @@ export const IconList =defineComponent({
 
         return ()=>(
             <div class={s.wrapper}>
-                <span class={s.signClass}>符号</span>
+                <span class={s.signClass}>符号 {props.modelValue}</span>
                 <main class={s.mainListClass}>
                     <ul class={s.listTag}>
                         {table.map((item,index)=>
