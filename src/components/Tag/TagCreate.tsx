@@ -1,10 +1,8 @@
-import {defineComponent, reactive, ref, watch} from "vue";
+import {defineComponent} from "vue";
 import {MainLayout} from "../../shared/MainLayout";
 import comeback from "../../assets/icons/comeback.svg";
-import {RouterView, useRouter} from "vue-router";
+import { useRouter} from "vue-router";
 import s from './TagCreate.module.scss'
-import {IconList} from "../../shared/IconList";
-import {Rules, validate} from "../../shared/validate";
 import {IconForm} from "../../shared/IconForm";
 
 export const TagCreatePage=defineComponent({
