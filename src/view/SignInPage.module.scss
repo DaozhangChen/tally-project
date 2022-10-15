@@ -1,0 +1,76 @@
+.wrapper{
+
+}
+.headerIcon{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0 25px 0;
+  img{
+    height: 70px;
+    margin-bottom: 10px;
+  }
+  h1{
+    font-size: 32px;
+    color: #7878FF;
+  }
+}
+
+.mainClass{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10% 16px 0 16px;
+  height: calc(100vh - 189px - var(--startpage-header-text-height));
+  .emailClass{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    span{
+      margin-bottom: 10px;
+    }
+    input{
+      height: 50px;
+      border: 1px solid #5C33BE;
+      border-radius:10px;
+      padding: 16px 0 16px 15px;
+      margin-bottom:20px ;
+    }
+  }
+
+  .verificationCode{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    span{
+      margin-bottom: 10px;
+    }
+    .sendClass{
+      display: flex;
+      justify-content: space-between;
+      height: 50px;
+      input{
+        width: 40%;
+        border: 1px solid #5C33BE;
+        border-radius: 10px;
+        padding: 16px 0 16px 15px;
+      }
+      button{
+        width: 55%;
+        background: #5C33BE;
+        color: #FFFFFF;
+        border-radius: 10px;
+      }
+    }
+  }
+}
+
+.submitButton{
+  height: 50px;
+  background: #5C33BE;
+  color: #FFFFFF;
+  border-radius: 10px;
+  font-size: 18px;
+  position: relative;
+  bottom: 40%;
+}

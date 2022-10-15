@@ -13,6 +13,7 @@ import {StartAccount} from "../view/StartAccount";
 import {TagCreatePage} from "../components/Tag/TagCreate";
 import {TagEdit} from "../components/Tag/TagEdit";
 import {AccountDetail} from "../view/AccountDetail";
+import {SignInPage} from "../view/SignInPage";
 
 export const routes:RouteRecordRaw[] = [
     {path:'/',redirect:'/welcome'},
@@ -31,5 +32,6 @@ export const routes:RouteRecordRaw[] = [
     {path:'/account',component:StartAccount},
     {path:'/tagCreate',component:TagCreatePage},
     {path:'/tagEdit',component:TagEdit},
-    {path:'/accountDetail',component:AccountDetail}
+    {path:'/accountDetail',component:AccountDetail},
+    {path:'/sign_in',component:SignInPage},
 ]
