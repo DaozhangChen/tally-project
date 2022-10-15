@@ -7,7 +7,7 @@
   align-items: center;
   padding: 40px 0 25px 0;
   img{
-    height: 70px;
+    height: 10vh;
     margin-bottom: 10px;
   }
   h1{
@@ -20,8 +20,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10% 16px 0 16px;
-  height: calc(100vh - 189px - var(--startpage-header-text-height));
+  padding: 0 16px 0 16px;
+  height: calc(100vh - 202px - var(--startpage-header-text-height));
+
 }
 
 .submitButton{
@@ -31,5 +32,5 @@
   border-radius: 10px;
   font-size: 18px;
   position: relative;
-  bottom: 40%;
+  bottom: 25%;
 }
