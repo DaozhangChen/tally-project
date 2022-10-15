@@ -4,6 +4,7 @@ import {Menu} from "../shared/Menu";
 import {FloatButton} from "../shared/FloatButton";
 import {BalanceSheet} from "../shared/BalanceSheet";
 import {Tab,Tabs} from "../shared/Tabs";
+import {Bill} from "../shared/Bill";
 
 export const AccountDetail=defineComponent({
     setup:(props,context)=> {
@@ -21,9 +22,10 @@ export const AccountDetail=defineComponent({
                         <Tab text='自定义时间' name='anyTime'></Tab>
                     </Tabs>
                     <BalanceSheet />
-                    <main>main</main>
+                    <Bill />
                     <FloatButton />
                     </div>
+
             }}</MainLayout>
         )
     }
