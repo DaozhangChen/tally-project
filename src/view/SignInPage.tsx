@@ -1,10 +1,11 @@
-import {defineComponent, reactive} from "vue";
+import {defineComponent, reactive, ref} from "vue";
 import {MainLayout} from "../shared/MainLayout";
 import comeback from "../assets/icons/comeback.svg";
 import mangosteen from '../assets/icons/mangosteen.svg'
 import s from './SignInPage.module.scss'
 import {FormItem} from "../shared/FormItem";
 import {Rules, validate} from "../shared/validate";
+import {http} from "../shared/Http";
 
 export const SignInPage=defineComponent({
     setup:()=>{
@@ -29,9 +30,20 @@ export const SignInPage=defineComponent({
                 {key:'code',type:'required',message:'必填'}
             ]
             Object.assign(errors,validate(formData,rules))
-
-
         }
+        const startCount=ref()
+        const onError=(error:any)=>{
+            if (error.response.status===422){
+                Object.assign(errors,error.response.data.errors)
+            }
+            throw error
+        }
+        const onSendValidateCode=async ()=>{
+            await http.post('/validation_codes',{email:formData.email})
+                .catch(error=>{onError(error)})
+            startCount.value.startCount()
+        }
+
         return ()=>
             <MainLayout>{{
                 title:()=>'登录',
@@ -47,6 +59,8 @@ export const SignInPage=defineComponent({
                                   v-model:email={formData.email}
                                   v-model:validationCode={formData.code}
                                   error={[errors.code,errors.email]}
+                                  onClick={onSendValidateCode}
+                                  ref={startCount}
                         />
                         <button class={s.submitButton} type='submit'>确定</button>
                     </form>

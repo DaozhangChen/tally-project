@@ -6,14 +6,19 @@ export const FormItem=defineComponent({
             type: String as PropType<string>,
             email:String,
             validationCode:String,
-            error:Array
+            error:Array,
+            countNumber:{
+                type:Number,
+                default:3
+            },
+            onClick:Function as PropType<()=>void>
         },
         emits:['update:email','update:validationCode'],
         setup: (props, context) => {
             const onTimeout=ref()
-            const countNumber=ref(0)
-            const onSendValidateCode=()=>{
-                countNumber.value=3
+            const countNumber=ref(props.countNumber)
+            const startCount=()=>{
+                countNumber.value=props.countNumber
                 onTimeout.value=setInterval(()=>{
                     countNumber.value -= 1
                     if (countNumber.value===0){
@@ -22,6 +27,7 @@ export const FormItem=defineComponent({
                     }
                 },1000)
             }
+            context.expose({startCount})
             const content = computed(() => {
                 switch (props.type) {
                     case 'sign_in':
@@ -43,7 +49,7 @@ export const FormItem=defineComponent({
                                            value={props.validationCode}
                                            onInput={(e:any)=>context.emit('update:validationCode',e.target.value)}
                                     />
-                                    <button type='button' disabled={onTimeout.value} onClick={onSendValidateCode}>{onTimeout.value ? `${countNumber.value}`:'发送验证码'}</button>
+                                    <button type='button' disabled={onTimeout.value} onClick={props.onClick}>{onTimeout.value ? `${countNumber.value}`:'发送验证码'}</button>
                                 </div>
                                 <div class={s.error}>{props.error?.[0] ? props.error[0]:''}</div>
                             </div>
