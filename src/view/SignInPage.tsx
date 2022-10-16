@@ -30,6 +30,19 @@ export const SignInPage=defineComponent({
                 {key:'code',type:'required',message:'必填'}
             ]
             Object.assign(errors,validate(formData,rules))
+            onSignIn()
+        }
+
+        const onSignIn=async ()=>{
+            for (const i in errors){
+                if (errors.email.length>0 ||errors.code.length>0){
+                    throw errors
+                }else {
+                 const response =await http.post<{jwt:string}>('/session',formData)
+                     .catch(onError)
+                    localStorage.setItem('jwt',response.data.jwt)
+                }
+            }
         }
         const startCount=ref()
         const onError=(error:any)=>{

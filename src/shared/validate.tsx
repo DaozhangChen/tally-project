@@ -19,7 +19,6 @@ export const validate=function (formData:FData,rules:Rules){
     rules.forEach(rule=>{
         const { key, type, message } = rule
         const value = formData[key]
-        console.log(`'value':${value},'key':${key}`)
         switch (type) {
             case 'required':
                 if (isEmpty(value)) {
