@@ -6,9 +6,11 @@ import s from './SignInPage.module.scss'
 import {FormItem} from "../shared/FormItem";
 import {Rules, validate} from "../shared/validate";
 import {http} from "../shared/Http";
+import {useRouter} from "vue-router";
 
 export const SignInPage=defineComponent({
     setup:()=>{
+        const router=useRouter()
         const formData=reactive({
             email:'',
             code:'',
@@ -30,7 +32,7 @@ export const SignInPage=defineComponent({
                 {key:'code',type:'required',message:'必填'}
             ]
             Object.assign(errors,validate(formData,rules))
-            onSignIn()
+            onSignIn().then((response)=>{return response},(error)=>{throw error})
         }
 
         const onSignIn=async ()=>{
@@ -41,6 +43,7 @@ export const SignInPage=defineComponent({
                  const response =await http.post<{jwt:string}>('/session',formData)
                      .catch(onError)
                     localStorage.setItem('jwt',response.data.jwt)
+                    router.push('/account')
                 }
             }
         }
