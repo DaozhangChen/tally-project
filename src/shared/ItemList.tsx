@@ -3,6 +3,7 @@ import purpleAdd from '../assets/icons/addpurple.svg'
 import s from './ItemList.module.scss'
 import {useRouter} from "vue-router";
 import {http} from "./Http";
+import {useTags} from "./useTags";
 
 export const ItemList=defineComponent({
     props:{
@@ -16,29 +17,15 @@ export const ItemList=defineComponent({
         const router =useRouter()
         const tags=ref([])
         const Icon=ref()
-        const refKind=ref(props.kind)
         const selectIcon=(e:any)=>{
             Icon.value=e.target.innerText
         }
-        onMounted(async ()=>{
-            const response=await http.get('/tags',{
-                kind:props.kind,
-                page:1
-            })
-            const {resources} = response.data
-            tags.value.push(...resources)
-            console.log(props.kind)
-        })
         watch(props,async ()=>{
-            const response=await http.get('/tags',{
-                kind:props.kind,
-                page:1
-            })
-            const {resources} = response.data
+            const value =await useTags(props.kind,1)
+            const {resources}=value
             tags.value.length=0
             tags.value.push(...resources)
-            console.log(props.kind)
-        })
+        },{immediate:true})
 
 
         return ()=>(
@@ -46,7 +33,7 @@ export const ItemList=defineComponent({
                 <div class={s.mainList}>
                     <div>
               <img src={purpleAdd} alt='一个+' class={s.addIcon} onClick={()=>router.push('/tagCreate')}/>
-                        新增{props.kind}
+                        新增
                     </div>
                     {tags.value.map(item=>
                         <div>

@@ -7,7 +7,7 @@ export const Bill=defineComponent({
         const billList =reactive({
             sign:String,
             name:String,
-            kind:String as PropType<'income'|'expend'>,
+            kind:String as PropType<'income'|'expenses'>,
             amount:String as PropType<string|number>
         })
         return () => <div class={s.wrapper}>

@@ -8,7 +8,7 @@ import {Tab,Tabs} from "../shared/Tabs";
 
 export const StartAccount=defineComponent({
     setup:()=>{
-        const selectedName=ref('expend')
+        const selectedName=ref('expenses')
         return()=>(
                 <MainLayout>
                     {{
@@ -17,7 +17,7 @@ export const StartAccount=defineComponent({
                         default:()=>(
                             <div class={s.wrapper}>
                                 <Tabs v-model:selected={selectedName.value}>
-                                    <Tab text='支出' name='expend' />
+                                    <Tab text='支出' name='expenses' />
                                     <Tab text='收入' name='income'  />
                                 </Tabs>
                                 <div class={s.itemList}>
