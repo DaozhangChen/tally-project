@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import {App} from "./App";
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter} from "vue-router";
 import {history} from "./shared/history";
 import {routes} from "./router/routes";
 import {http} from "./shared/Http";

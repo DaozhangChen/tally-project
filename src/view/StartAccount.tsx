@@ -21,7 +21,7 @@ export const StartAccount=defineComponent({
                                     <Tab text='收入' name='income'  />
                                 </Tabs>
                                 <div class={s.itemList}>
-                                    <ItemList />
+                                    <ItemList kind={selectedName.value}/>
                                 </div>
                                 <div>
                                     <Calculator />
