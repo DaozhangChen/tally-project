@@ -23,3 +23,5 @@ export class Http{
         return this.instance.request<R>({...config,url:url,params:query,method:'delete'})
     }
  }
+
+ export const http=new Http('api/v1')

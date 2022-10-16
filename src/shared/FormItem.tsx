@@ -10,6 +10,18 @@ export const FormItem=defineComponent({
         },
         emits:['update:email','update:validationCode'],
         setup: (props, context) => {
+            const onTimeout=ref()
+            const countNumber=ref(0)
+            const onSendValidateCode=()=>{
+                countNumber.value=3
+                onTimeout.value=setInterval(()=>{
+                    countNumber.value -= 1
+                    if (countNumber.value===0){
+                        clearInterval(onTimeout.value)
+                        onTimeout.value=0
+                    }
+                },1000)
+            }
             const content = computed(() => {
                 switch (props.type) {
                     case 'sign_in':
@@ -31,7 +43,7 @@ export const FormItem=defineComponent({
                                            value={props.validationCode}
                                            onInput={(e:any)=>context.emit('update:validationCode',e.target.value)}
                                     />
-                                    <button>发送验证码</button>
+                                    <button type='button' disabled={onTimeout.value} onClick={onSendValidateCode}>{onTimeout.value ? `${countNumber.value}`:'发送验证码'}</button>
                                 </div>
                                 <div class={s.error}>{props.error?.[0] ? props.error[0]:''}</div>
                             </div>

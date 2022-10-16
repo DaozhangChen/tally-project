@@ -37,6 +37,10 @@
       background: #5C33BE;
       color: #FFFFFF;
       border-radius: 10px;
+      &[disabled]{
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
   }
 }
