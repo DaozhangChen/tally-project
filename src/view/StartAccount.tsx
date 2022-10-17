@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch } from "vue";
+import {defineComponent, reactive, ref, watch} from "vue";
 import { MainLayout } from "../shared/MainLayout";
 import comeback from '../assets/icons/comeback.svg'
 import s from './StartAccount.module.scss'
@@ -6,31 +6,59 @@ import { Calculator } from "../shared/Calculator";
 import { ItemList } from "../shared/ItemList";
 import { Tab, Tabs } from "../shared/Tabs";
 import { useRouter } from "vue-router";
-import {Time} from "../shared/time";
 import {http} from "../shared/Http";
+import {hasError, Rules, validate} from "../shared/validate";
+import 'vant/es/dialog/style'
+import {Dialog, Toast} from "vant";
+import {AxiosError} from "axios";
 
 export const StartAccount = defineComponent({
     setup: () => {
         const router = useRouter()
-        const selectedName = ref('expenses')
         const back = () => { router.push('/start') }
-        const amount=ref()
-        const time=ref()
-        const refId=ref()
+        const formData=reactive<Partial<Item>>({
+            kind: 'expenses',
+            tag_ids: undefined,
+            amount:0,
+            happen_at:new Date().toISOString()
+        })
+        const onError= (error: AxiosError<ResourceError>) =>{
+            if (error.response?.status===422){
+                Dialog.alert({
+                    title:'出错',
+                    message:Object.values(error.response.data.errors).join('/n')
+                })
+            }
+            throw error
+        }
+
         const onSubmit=async (e:Event)=>{
             e.preventDefault()
-            console.log(amount.value)
-            console.log(selectedName.value)
-            console.log(time.value)
-            console.log(refId.value)
-            await http.post('/items',{
-                amount:amount.value,
-                kind:selectedName.value,
-                happen_at:time.value,
-                tag_ids:[Number(refId.value)]
-            },{
+            const errors = reactive<FormErrors<typeof formData>>({ kind: [], tag_ids: [], amount: [], happen_at: [] })
+            const rules: Rules = [
+                { key: 'kind', type: 'required', message: '类型必填' },
+                { key: 'tag_ids', type: 'required', message: '标签必填' },
+                { key: 'amount', type: 'required', message: '金额必填' },
+                { key: 'amount', type: 'notEqual', value: 0, message: '金额不能为零' },
+                { key: 'amount', type: 'notNaN', message: '金额未知' },
+                { key: 'happen_at', type: 'required', message: '时间必填' },
+            ]
+            Object.assign(errors,validate(formData,rules))
+
+            if(hasError(errors)){
+                Dialog.alert({
+                    title: '出错',
+                    message: Object.values(errors).filter(i=>i.length>0).join('\n')
+                })
+                return
+            }
+            await http.post('/items',formData,{
                 _autoLoading:true
-            })
+            }).then(()=>{
+                Toast.success('记账成功')
+            },()=>{onError})
+            router.push('/start')
+
         }
         return () => (
             <MainLayout>
@@ -39,17 +67,17 @@ export const StartAccount = defineComponent({
                     title: () => '记一笔',
                     default: () => (
                         <form class={s.wrapper} onSubmit={onSubmit}>
-                            <Tabs v-model:selected={selectedName.value}>
+                            <Tabs v-model:selected={formData.kind}>
                                 <Tab text='支出' name='expenses' />
                                 <Tab text='收入' name='income' />
                             </Tabs>
                             <div class={s.itemList}>
-                                <ItemList kind={selectedName.value} v-model:id={refId.value}/>
+                                <ItemList kind={formData.kind} v-model:id={formData.tag_ids}/>
                             </div>
                             <div>
-                                <Calculator v-model:amount={amount.value}
+                                <Calculator v-model:amount={formData.amount}
                                             onClick={onSubmit}
-                                            v-model:time={time.value}
+                                            v-model:time={formData.happen_at}
                                 />
                             </div>
                         </form>

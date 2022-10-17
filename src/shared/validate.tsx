@@ -7,7 +7,8 @@ type Rule={
 } &(
     { type: 'required' } |
     { type: 'pattern', regex: RegExp } |
-    { type: 'notEqual', value: JSONValue }
+    { type: 'notEqual', value: JSONValue }|
+    { type: 'notNaN' }
     )
 type Rules=Rule[]
 export type {Rules,Rule,FData}
@@ -23,6 +24,7 @@ export const validate=function (formData:FData,rules:Rules){
             case 'required':
                 if (isEmpty(value)) {
                     errors[key] = errors[key] ?? []
+                    console.log('1111')
                     errors[key]?.push(message)
                 }
                 break;
@@ -38,6 +40,12 @@ export const validate=function (formData:FData,rules:Rules){
                     errors[key]?.push(message)
                 }
                 break;
+            case 'notNaN':
+                if (Number.isNaN(value)) {
+                    errors[key] = errors[key] ?? []
+                    errors[key]?.push(message)
+                }
+                break;
             default:
                 return
         }
@@ -45,6 +53,17 @@ export const validate=function (formData:FData,rules:Rules){
     return errors
 }
 
-function isEmpty(value: null | undefined | string | number | FData) {
+function isEmpty(value: null | undefined | string | number | FData ) {
     return value === null || value === undefined || value === ''
+}
+
+export function hasError(errors: Record<string, string[]>) {
+    let result = false
+    for (let key in errors) {
+        if (errors[key]?.length > 0) {
+            result = true
+            break
+        }
+    }
+    return result
 }

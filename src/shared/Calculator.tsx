@@ -9,7 +9,7 @@ import {Time} from "./time";
 
 export const Calculator=defineComponent({
     props:{
-        amount:String,
+        amount:Number,
         onClick:Function as PropType<(e:Event)=>void>,
         time:String
     },
@@ -69,7 +69,7 @@ export const Calculator=defineComponent({
         }
         const refAmount = ref('')
         watch([refAmount,refTime],()=>{
-            context.emit('update:amount',refAmount.value);
+            context.emit('update:amount',parseFloat(refAmount.value) * 100);
             context.emit('update:time',refTime.value);
         },{immediate:true})
 

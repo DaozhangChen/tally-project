@@ -1,4 +1,4 @@
-import { computed, defineComponent, nextTick, onMounted, onUpdated, reactive, ref, watch } from "vue";
+import {computed, defineComponent, nextTick, onMounted, onUpdated, PropType, reactive, ref, watch} from "vue";
 import purpleAdd from '../assets/icons/addpurple.svg'
 import s from './ItemList.module.scss'
 import { useRoute, useRouter } from "vue-router";
@@ -8,29 +8,32 @@ import { useTags } from "./useTags";
 export const ItemList = defineComponent({
     props: {
         kind: {
-            type: String,
+            type: String as PropType<string|undefined>,
             required: true,
         },
-        id:String
+        id: Array
 
     },
-    emits:['update:id'],
+    emits: ['update:id'],
     setup: (props, context) => {
         const router = useRouter()
         const tags = ref([])
         const Icon = ref()
         const selectIcon = (e: any) => {
             Icon.value = e.target.innerText
-            context.emit('update:id',e.target.id)
+            const refId=ref<Array<string>>([])
+            refId.value.push(e.target.id)
+            context.emit('update:id', refId.value)
+            console.log(props.id)
         }
-        watch(()=>props.kind,
-
+        watch(() => props.kind,
             async () => {
-            const value = await useTags(props.kind, 1)
-            const { resources } = value
-            tags.value.length = 0
-            tags.value.push(...resources)
-        }, { immediate: true })
+                const value = await useTags(props.kind, 1)
+                const { resources } = value
+                tags.value.length = 0
+                tags.value.push(...resources)
+            }, { immediate: true }
+        )
 
 
 
@@ -45,8 +48,8 @@ export const ItemList = defineComponent({
                     {tags.value.map(item =>
                         <div>
                             <div class={Icon.value === item.sign ? s.selected : ''}
-                                 onClick={selectIcon}
-                                 id={item.id}
+                                onClick={selectIcon}
+                                id={item.id}
                             >
                                 {item.sign}
                             </div>

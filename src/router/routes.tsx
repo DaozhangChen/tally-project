@@ -33,5 +33,5 @@ export const routes:RouteRecordRaw[] = [
     {path:'/tagCreate',component:TagCreatePage},
     {path:'/tagEdit',component:TagEdit},
     {path:'/accountDetail',component:AccountDetail},
-    {path:'/sign_in',component:SignInPage},
+    {path:'/sign_in',component:SignInPage}
 ]

@@ -26,3 +26,17 @@ type Resources< T= any>={
     count:number
   }
 }
+
+type Item={
+  id:number
+  user_id:number
+  amount:number
+  tag_ids: number[];
+  tags?:Tag[]
+  happen_at:string
+  kind:'expenses'|'income'
+}
+
+type ResourceError={
+  errors:Record<string, string[]>
+}
