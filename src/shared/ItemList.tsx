@@ -23,12 +23,15 @@ export const ItemList = defineComponent({
             Icon.value = e.target.innerText
             context.emit('update:id',e.target.id)
         }
-        watch(props, async () => {
+        watch(()=>props.kind,
+
+            async () => {
             const value = await useTags(props.kind, 1)
             const { resources } = value
             tags.value.length = 0
             tags.value.push(...resources)
         }, { immediate: true })
+
 
 
 
