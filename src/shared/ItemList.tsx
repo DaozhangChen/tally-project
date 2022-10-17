@@ -11,14 +11,17 @@ export const ItemList = defineComponent({
             type: String,
             required: true,
         },
+        id:String
 
     },
+    emits:['update:id'],
     setup: (props, context) => {
         const router = useRouter()
         const tags = ref([])
         const Icon = ref()
         const selectIcon = (e: any) => {
             Icon.value = e.target.innerText
+            context.emit('update:id',e.target.id)
         }
         watch(props, async () => {
             const value = await useTags(props.kind, 1)
@@ -38,7 +41,12 @@ export const ItemList = defineComponent({
                     </div>
                     {tags.value.map(item =>
                         <div>
-                            <div class={Icon.value === item.sign ? s.selected : ''} onClick={selectIcon}>{item.sign}</div>
+                            <div class={Icon.value === item.sign ? s.selected : ''}
+                                 onClick={selectIcon}
+                                 id={item.id}
+                            >
+                                {item.sign}
+                            </div>
                             {item?.name}
                         </div>
                     )}

@@ -1,4 +1,4 @@
-import {defineComponent, ref} from "vue";
+import {defineComponent, PropType, ref, watch} from "vue";
 import s from './Calculator.module.scss'
 import dateIcon from '../assets/icons/date.svg'
 import {DatetimePicker, Popup} from "vant/es";
@@ -8,7 +8,13 @@ import {Time} from "./time";
 
 
 export const Calculator=defineComponent({
-    setup:()=>{
+    props:{
+        amount:String,
+        onClick:Function as PropType<(e:Event)=>void>,
+    },
+    emits:['update:amount','update:time'],
+    setup:(props,context)=>{
+        const refTime=ref(new Time().format())
 
         //计算器输入规则
         const appendText = (n: number | string) => {
@@ -50,7 +56,7 @@ export const Calculator=defineComponent({
             {text:'0',onClick:()=>{appendText(0)}},
             {text:'.',onClick:()=>{appendText('.')}},
             {text:'清空',onClick:()=>{refAmount.value=''}},
-            {text:'提交',onClick:()=>{}},
+            {text:'提交',onClick:props.onClick},
         ]
         const pressNumber=ref(null)
         const press=(e:any)=>{
@@ -60,6 +66,10 @@ export const Calculator=defineComponent({
             },200)
         }
         const refAmount = ref('')
+        watch([refAmount,refTime],()=>{
+            context.emit('update:amount',refAmount.value);
+            context.emit('update:time',refTime.value);
+        },{immediate:true})
 
         //时间选择器与弹出层
         const refShow=ref(false)
@@ -67,11 +77,14 @@ export const Calculator=defineComponent({
             refShow.value= !refShow.value
         }
         const hideDatePicker=()=>refShow.value=false
-        const refTime=ref(new Time().format())
+
         const setTime=(date:Date)=>{
             refTime.value=new Time(date).format()
+            console.log(refTime.value)
+            context.emit('update:time',refTime.value)
             hideDatePicker()
         }
+
         return ()=>(
             <div class={s.wrapper}>
                 <div class={s.dateAndAmount}>
@@ -92,9 +105,12 @@ export const Calculator=defineComponent({
                     <span class={s.AmountNumber}>{refAmount.value}</span>
                 </div>
                 <div class={s.gridCalculator} onClick={press}>
-                    {button.map(button=>
-                    <button onClick={button.onClick}
-                            class={(pressNumber.value===button.text) ? s.pressOn: s.pressUp}>{button.text}</button>
+                    {button.map(item=>
+                    <button onClick={item.onClick}
+                            class={(pressNumber.value===item.text) ? s.pressOn: s.pressUp}
+                            type='button'
+                    >{item.text}
+                    </button>
                     )}
                 </div>
             </div>

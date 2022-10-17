@@ -40,7 +40,7 @@ export const SignInPage=defineComponent({
                 if (errors.email.length>0 ||errors.code.length>0){
                     throw errors
                 }else {
-                 const response =await http.post<{jwt:string}>('/session',formData)
+                 const response =await http.post<{jwt:string}>('/session',formData,{_autoLoading:true})
                      .catch(onError)
                     localStorage.setItem('jwt',response.data.jwt)
                     router.push('/account')
@@ -55,7 +55,7 @@ export const SignInPage=defineComponent({
             throw error
         }
         const onSendValidateCode=async ()=>{
-            await http.post('/validation_codes',{email:formData.email})
+            await http.post('/validation_codes',{email:formData.email},{_autoLoading:true})
                 .catch(error=>{onError(error)})
             startCount.value.startCount()
         }
