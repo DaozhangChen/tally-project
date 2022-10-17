@@ -17,3 +17,12 @@ type Tag={
 type JSONValue = null | boolean | string | number | JSONValue[] | Record<string, JSONValue>
 
 type FormErrors<T> = {[K in keyof typeof T]: string[]}
+
+type Resources< T= any>={
+  resources:T[]
+  pager:{
+    page:number,
+    per_page:number,
+    count:number
+  }
+}
