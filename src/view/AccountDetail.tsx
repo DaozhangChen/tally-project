@@ -17,8 +17,8 @@ export const AccountDetail=defineComponent({
         const selected=ref<string>('thisMonth')
         const refTime=new Time()
         const StartEndTime=reactive({
-            startTime:undefined,
-            endTime:undefined
+            startTime:new Time(),
+            endTime:new Time()
         })
         const refShow=ref(false)
         const controlShow=()=>{
@@ -26,6 +26,33 @@ export const AccountDetail=defineComponent({
                 refShow.value = !refShow.value
             }
         }
+        const showDatePicker=ref(false)
+        const currentDate=ref(new Date())
+        const StartOrEnd=ref('start')
+
+        const setStartTime=()=>{
+            showDatePicker.value=true
+            StartOrEnd.value='start'
+            console.log(StartOrEnd.value)
+        }
+        const setEndTime=()=>{
+            showDatePicker.value=true
+            StartOrEnd.value='end'
+            console.log(StartOrEnd.value)
+        }
+        const setAnyTime=(date:Date)=>{
+            console.log('1111')
+            if (StartOrEnd.value==='start'){
+                StartEndTime.startTime=new Time(date)
+                console.log(StartEndTime.startTime)
+                showDatePicker.value=false
+            }else if (StartOrEnd.value==='end'){
+                StartEndTime.endTime=new Time(date)
+                showDatePicker.value=false
+            }
+
+        }
+
         watch(selected,()=>{
             if (selected.value==='thisMonth'){
                 Object.assign(StartEndTime,{
@@ -51,12 +78,13 @@ export const AccountDetail=defineComponent({
             }else {return }
           },{immediate:true}
         )
+
         return () => (
             <MainLayout>{{
                 title: () => '山竹记账',
                 icon: () => <Menu/>,
                 default: () =>
-                    <div>
+                    { return <div>
                     <Tabs v-model:selected={selected.value} onClick={controlShow}>
                         <Tab text='本月' name='thisMonth'/>
                         <Tab text='上月' name='beforeMonth'></Tab>
@@ -71,20 +99,27 @@ export const AccountDetail=defineComponent({
                              <div class={s.title}>请选择时间</div>
                              <div class={s.startTime}>
                                  <span>开始时间</span>
-                                 <div>时间</div>
+                                 <div onClick={setStartTime}>{StartEndTime.startTime.format()}</div>
                              </div>
                              <div class={s.endTime}>
                                  <span>结束时间</span>
-                                 <div>时间</div>
+                                 <div onClick={setEndTime}>{StartEndTime.endTime.format()}</div>
                              </div>
                              <button type='button' class={s.yesButton}>确定</button>
-                             <button type='button' class={s.noButton}>取消</button>
+                             <button type='button' class={s.noButton} onClick={()=>refShow.value=false}>取消</button>
                          </div>
                      </Popup>
-                        <Popup>
-                            <DatetimePicker />
-                        </Popup>
-                    </div>
+                      <Popup v-model:show={showDatePicker.value} position='bottom'>
+                            <DatetimePicker type="date"
+                                            v-model={currentDate.value}
+                                            title='请选择时间'
+                                            onConfirm={setAnyTime}
+                                            onCancel={()=>showDatePicker.value=false}
+
+
+                            />
+                     </Popup>
+                    </div>;}
 
             }}</MainLayout>
         )
