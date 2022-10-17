@@ -7,6 +7,7 @@ import { ItemList } from "../shared/ItemList";
 import { Tab, Tabs } from "../shared/Tabs";
 import { useRouter } from "vue-router";
 import {Time} from "../shared/time";
+import {http} from "../shared/Http";
 
 export const StartAccount = defineComponent({
     setup: () => {
@@ -16,12 +17,20 @@ export const StartAccount = defineComponent({
         const amount=ref()
         const time=ref()
         const refId=ref()
-        const onSubmit=(e:Event)=>{
+        const onSubmit=async (e:Event)=>{
             e.preventDefault()
             console.log(amount.value)
             console.log(selectedName.value)
             console.log(time.value)
             console.log(refId.value)
+            await http.post('/items',{
+                amount:amount.value,
+                kind:selectedName.value,
+                happen_at:time.value,
+                tag_ids:[Number(refId.value)]
+            },{
+                _autoLoading:true
+            })
         }
         return () => (
             <MainLayout>

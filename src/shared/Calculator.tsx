@@ -11,10 +11,12 @@ export const Calculator=defineComponent({
     props:{
         amount:String,
         onClick:Function as PropType<(e:Event)=>void>,
+        time:String
     },
     emits:['update:amount','update:time'],
     setup:(props,context)=>{
-        const refTime=ref(new Time().format())
+        const refTime=ref(new Date().toISOString())
+        console.log(new Time())
 
         //计算器输入规则
         const appendText = (n: number | string) => {
@@ -79,9 +81,8 @@ export const Calculator=defineComponent({
         const hideDatePicker=()=>refShow.value=false
 
         const setTime=(date:Date)=>{
-            refTime.value=new Time(date).format()
             console.log(refTime.value)
-            context.emit('update:time',refTime.value)
+            context.emit('update:time',date.toISOString())
             hideDatePicker()
         }
 
@@ -91,12 +92,11 @@ export const Calculator=defineComponent({
                     <div class={s.datePicker} >
                         <div onClick={controlShow} class={s.miniDatePicker}>
                         <img src={dateIcon} alt='一本日历' class={s.dateIcon} />
-                        <span class={s.showTime}>{refTime.value}</span>
+                        <span class={s.showTime}>{new Time(props.time).format()}</span>
                         </div>
                         <Popup v-model:show={refShow.value} position='bottom'>
                             <DatetimePicker title='选择时间'
                                             modelValue={new Date(refTime.value)}
-                                            type='date'
                                             onCancel={hideDatePicker}
                                             onConfirm={setTime}
                             />
