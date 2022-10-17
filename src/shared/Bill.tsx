@@ -1,15 +1,19 @@
-import {defineComponent, PropType, reactive} from "vue";
+import {defineComponent, PropType, reactive, watch} from "vue";
 import s from './Bill.module.scss'
 
 export const Bill=defineComponent({
+    props:{
+        selected:String
+    },
 
-    setup:()=> {
+    setup:(props,context)=> {
         const billList =reactive({
             sign:String,
             name:String,
             kind:String as PropType<'income'|'expenses'>,
             amount:String as PropType<string|number>
         })
+        watch(()=>props.selected,(value, oldValue, onCleanup)=>{console.log('22')})
         return () => <div class={s.wrapper}>
             <div class={s.mainFlexClass}>
                 <div>

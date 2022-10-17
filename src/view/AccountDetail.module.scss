@@ -1,0 +1,59 @@
+.topAnyTimeClass{
+  width: 80vw;
+  height:365px;
+  font-size: 18px;
+
+  .title{
+    height: 52px;
+    background: #5C33BE;
+    color: #FFFFFF;
+    display: flex;
+    padding:16px;
+    align-items: center;
+
+  }
+  .startTime{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    padding: 0 16px;
+    >div{
+      border: 1px solid #5C33BE;
+      border-radius: 10px;
+      height: 50px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      color: #999999;
+    }
+  }
+
+  .endTime{
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    padding:0 16px;
+    >div{
+      border: 1px solid #5C33BE;
+      border-radius: 10px;
+      height: 50px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      color: #999999;
+    }
+  }
+
+  .yesButton{
+    position: absolute;
+    bottom: 16px;
+    right: 19px;
+  }
+  .noButton{
+    position: absolute;
+    bottom: 16px;
+    right: 80px;
+  }
+}

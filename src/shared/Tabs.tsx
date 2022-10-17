@@ -1,9 +1,10 @@
-import {defineComponent, ref, resolveTransitionHooks} from "vue";
+import {defineComponent, PropType, ref, resolveTransitionHooks} from "vue";
 import s from './Tabs.module.scss'
 
 export const Tabs=defineComponent({
     props:{
-        selected:String
+        selected:String,
+        onClick:Function as PropType<()=>void >
     },
     emits:['update:selected'],
     setup:(props,context)=>{
@@ -15,7 +16,7 @@ export const Tabs=defineComponent({
                 throw new Error('<Tabs> only accepts <Tab> as children')
             }
         }
-        return <div class={s.wrapper}>
+        return <div class={s.wrapper} onClick={props.onClick}>
                 <ul class={s.tabClass}>
                     {tabs.map(item =>
                         <li class={(props.selected===item.props?.name) ?  [s.normal,s.selected]: s.normal}
@@ -34,7 +35,7 @@ export const Tabs=defineComponent({
 export const Tab =defineComponent({
     props:{
         name:String,
-        text:String
+        text:String,
     },
     setup:(props,context)=>{
         return ()=>(
