@@ -1,7 +1,11 @@
 import {defineComponent, PropType, reactive} from "vue";
 import {IconList} from "./IconList";
-import {Rules, validate} from "./validate";
+import {hasError, Rules, validate} from "./validate";
 import s from './IconForm.module.scss'
+import {routerKey, useRoute, useRouter} from "vue-router";
+import {http} from "./Http";
+import 'vant/es/toast/style'
+import {Toast} from "vant";
 
 export const IconForm =defineComponent({
     props:{
@@ -10,10 +14,16 @@ export const IconForm =defineComponent({
         }
     },
     setup: (props, context) => {
+        const route=useRoute()
+        const router=useRouter()
         const formData = reactive<Partial<Tag>>({
             name: '',
             sign: '',
         })
+        if (route.query.id){
+            formData.name=route.query.name
+            formData.sign=route.query.sign
+        }
         const errors = reactive<FormErrors<typeof formData>>({})
         const onSubmit = (e: Event) => {
             e.preventDefault()
@@ -27,6 +37,16 @@ export const IconForm =defineComponent({
                 sign: []
             })
             Object.assign(errors, validate(formData, rules))
+            if (!hasError(errors)){
+                http.patch(`/tags/${route.query.id}`,formData,{_autoLoading:true})
+                    .then(()=>{
+                        Toast.success('修改成功')
+                        setTimeout(()=>{
+                            router.back()
+                        },1000)
+                    },(error)=>{throw error})
+
+            }
         }
         return () => (
             <form onSubmit={onSubmit}>

@@ -35,8 +35,6 @@ export const StartAccount = defineComponent({
         const timeoutId=ref()
         const currentId=ref()
         const onTouchStart=(e:any)=>{
-
-            console.log(e.target.title)
             if (e.target.id===null||e.target.id===undefined||e.target.id===''){
                 return
             }
@@ -44,7 +42,7 @@ export const StartAccount = defineComponent({
             timeoutId.value=setTimeout(()=>{
                 e.preventDefault()
                router.push(`/tagEdit?id=${e.target.id}&name=${e.target.title}&sign=${e.target.innerText}`)
-            },800)
+            },500)
         }
         const onTouchMove=()=>{
             clearTimeout(timeoutId.value)
@@ -52,9 +50,6 @@ export const StartAccount = defineComponent({
         const onTouchEnd=()=>{
             clearTimeout(timeoutId.value)
         }
-
-
-
 
         const onSubmit=async (e:Event)=>{
             e.preventDefault()
@@ -82,7 +77,6 @@ export const StartAccount = defineComponent({
                 Toast.success('记账成功')
             },()=>{onError})
             router.push('/start')
-
         }
         return () => (
             <MainLayout>

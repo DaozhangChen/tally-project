@@ -16,7 +16,7 @@ export const TagEdit=defineComponent({
                 title: () => '编辑标签',
                 icon: () => <img src={comeback} alt='一个返回' onClick={back}/>,
                 default: () =><>
-                    <IconForm buttonType='edit'/>
+                <IconForm buttonType='edit'/>
                 <div class={s.upDeleteButton}>
                 <button class={s.deleteButton}>删除记账和标签</button>
                 </div>
