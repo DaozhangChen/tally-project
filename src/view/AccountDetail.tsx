@@ -21,6 +21,7 @@ export const AccountDetail=defineComponent({
             startTime:new Time(),
             endTime:new Time()
         })
+        const refConfirm=ref<boolean>(false)
 
         const refShow=ref<boolean>(false)
         const controlShow=()=>{
@@ -49,6 +50,13 @@ export const AccountDetail=defineComponent({
             }
             showDatePicker.value=false
         }
+        const confirmSetAnyTime=()=>{
+           refConfirm.value=true
+            refShow.value=false
+            setTimeout(()=>{
+                refConfirm.value=false
+            },1000)
+        }
 
         watch(selected,()=>{
             Object.assign(StartEndTime,selectTime(selected.value))
@@ -67,8 +75,16 @@ export const AccountDetail=defineComponent({
                         <Tab text='今年' name='thisYear'></Tab>
                         <Tab text='自定义时间' name='anyTime'></Tab>
                     </Tabs>
-                    <BalanceSheet select={selected.value} startTime={StartEndTime.startTime} endTime={StartEndTime.endTime}/>
-                    <Bill selected={selected.value} />
+                    <BalanceSheet select={selected.value}
+                                  startTime={StartEndTime.startTime}
+                                  endTime={StartEndTime.endTime}
+                                  onConfirm={refConfirm.value}
+                    />
+                    <Bill selected={selected.value}
+                          startTime={StartEndTime.startTime}
+                          endTime={StartEndTime.endTime}
+                          onConfirm={refConfirm.value}
+                    />
                     <FloatButton />
                      <Popup v-model:show={refShow.value}>
                          <div class={s.topAnyTimeClass}>
@@ -81,7 +97,7 @@ export const AccountDetail=defineComponent({
                                  <span>结束时间</span>
                                  <div onClick={setEndTime}>{StartEndTime.endTime.format()}</div>
                              </div>
-                             <button type='button' class={s.yesButton}>确定</button>
+                             <button type='button' class={s.yesButton} onClick={confirmSetAnyTime}>确定</button>
                              <button type='button' class={s.noButton} onClick={()=>refShow.value=false}>取消</button>
                          </div>
                      </Popup>

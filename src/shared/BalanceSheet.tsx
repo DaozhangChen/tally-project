@@ -7,19 +7,29 @@ export const BalanceSheet=defineComponent({
     props:{
         startTime:Time,
         endTime:Time,
-        select:String
+        select:String,
+        onConfirm:Boolean
     },
     setup:(props,context)=>{
         const itemsBalance = reactive({
             expenses: 0, income: 0, balance: 0
         })
-        watch(()=>[props.startTime,props.endTime],async ()=>{
-            if (props.select==='anyTime'){return}
-            const response=await http.get('/items/balance',{
-                happen_after:props.startTime?.format(),
-                happen_before:props.endTime?.format()
-            })
-            Object.assign(itemsBalance,response.data)
+        watch(()=>[props.startTime,props.endTime,props.onConfirm],async ()=>{
+            if (props.select==='anyTime'){
+                if (props.onConfirm){
+                    const response=await http.get('/items/balance',{
+                        happen_after:props.startTime?.format(),
+                        happen_before:props.endTime?.format()
+                    })
+                    Object.assign(itemsBalance, response.data)
+                }else return
+            }else {
+                const response = await http.get('/items/balance', {
+                    happen_after: props.startTime?.format(),
+                    happen_before: props.endTime?.format()
+                })
+                Object.assign(itemsBalance, response.data)
+            }
 
         },{immediate:true})
         return ()=>
@@ -27,15 +37,15 @@ export const BalanceSheet=defineComponent({
                 <div class={s.mainBalanceClass}>
                     <div class={[s.navClass,s.income]}>
                         <div>收入</div>
-                        <span>{itemsBalance.income}</span>
+                        <span>{(itemsBalance.income)/100}</span>
                     </div>
                     <div class={[s.navClass,s.expend]}>
                         <div>支出</div>
-                        <span>{itemsBalance.expenses}</span>
+                        <span>{(itemsBalance.expenses)/100}</span>
                     </div>
                     <div class={[s.navClass,s.balance]}>
                         <div>净收入</div>
-                        <span>{itemsBalance.balance}</span>
+                        <span>{(itemsBalance.balance)/100}</span>
                     </div>
                 </div>
             </div>
