@@ -24,7 +24,13 @@ const whiteList: Record<string, 'exact' | 'startsWith'> = {
 const useMeStore=meStore()
 const {mePromise}=storeToRefs(useMeStore)
 const meData=ref()
+const jwt=localStorage.getItem('jwt')
 
+if (jwt){
+    useMeStore.fetchMe()
+    meData.value=await mePromise.value
+    useMeStore.meEmail=meData.value.data.resource.email
+}
 
 router.beforeEach(async (to,from)=>{
     for (const key in whiteList){

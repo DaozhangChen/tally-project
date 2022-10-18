@@ -14,8 +14,5 @@ export const meStore=defineStore('me',{
         fetchMe() {
            this.refreshMe()
         },
-        getEmail(){
-            console.log(this.mePromise)
-        }
     }
 })
