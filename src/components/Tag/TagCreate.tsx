@@ -8,19 +8,15 @@ import { IconForm } from "../../shared/IconForm";
 export const TagCreatePage = defineComponent({
     setup: (props, context) => {
         const router = useRouter()
-        const back = () => {
-            router.back()
-        }
         const route = useRoute()
+
         console.log(route.query.kind)
         return () => (
             <MainLayout>{{
                 title: () => '新建标签',
-                icon: () => <img src={comeback} alt='一个返回' onClick={back} />,
+                icon: () => <img src={comeback} alt='一个返回' onClick={()=>{router.back()}} />,
                 default: () =>
-                    <IconForm buttonType='create'>
-                        {{ button: () => <button class={s.buttonClass} type='submit'>确定</button> }}
-                    </IconForm>
+                    <IconForm buttonType='create' />
             }}</MainLayout>
         )
 

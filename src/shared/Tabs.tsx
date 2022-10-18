@@ -20,7 +20,10 @@ export const Tabs=defineComponent({
                 <ul class={s.tabClass}>
                     {tabs.map(item =>
                         <li class={(props.selected===item.props?.name) ?  [s.normal,s.selected]: s.normal}
-                            onClick={()=>context.emit('update:selected',item.props?.name)}
+                            onClick={()=>{
+                                context.emit('update:selected',item.props?.name)
+                                localStorage.setItem('kind',item.props?.name)
+                            }}
                         >
                             {item.props?.text}
                         </li>

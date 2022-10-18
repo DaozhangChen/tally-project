@@ -5,7 +5,7 @@ import s from './IconForm.module.scss'
 import {routerKey, useRoute, useRouter} from "vue-router";
 import {http} from "./Http";
 import 'vant/es/toast/style'
-import {Toast} from "vant";
+import { Toast} from "vant";
 
 export const IconForm =defineComponent({
     props:{
@@ -19,6 +19,7 @@ export const IconForm =defineComponent({
         const formData = reactive<Partial<Tag>>({
             name: '',
             sign: '',
+            kind:route.query.kind
         })
         if (route.query.id){
             formData.name=route.query.name
@@ -38,6 +39,16 @@ export const IconForm =defineComponent({
             })
             Object.assign(errors, validate(formData, rules))
             if (!hasError(errors)){
+                if (route.query.kind){
+                    Object.assign(formData,{kind:route.query.kind})
+                    http.post(`/tags`,formData)
+                        .then(()=>{
+                            Toast.success('添加标签成功')
+                            setTimeout(()=>{
+                                router.back()
+                            },1000)
+                        })
+                }else {
                 http.patch(`/tags/${route.query.id}`,formData,{_autoLoading:true})
                     .then(()=>{
                         Toast.success('修改成功')
@@ -45,6 +56,7 @@ export const IconForm =defineComponent({
                             router.back()
                         },1000)
                     },(error)=>{throw error})
+                }
 
             }
         }

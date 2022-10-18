@@ -5,7 +5,7 @@ import s from './StartAccount.module.scss'
 import { Calculator } from "../shared/Calculator";
 import { ItemList } from "../shared/ItemList";
 import { Tab, Tabs } from "../shared/Tabs";
-import { useRouter } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {http} from "../shared/Http";
 import {hasError, Rules, validate} from "../shared/validate";
 import 'vant/es/dialog/style'
@@ -15,6 +15,7 @@ import {AxiosError} from "axios";
 export const StartAccount = defineComponent({
     setup: () => {
         const router = useRouter()
+        const route=useRoute()
         const back = () => { router.push('/start') }
         const formData=reactive<Partial<Item>>({
             kind: 'expenses',
@@ -22,6 +23,9 @@ export const StartAccount = defineComponent({
             amount:0,
             happen_at:new Date().toISOString()
         })
+        if (localStorage.getItem('kind')){
+            formData.kind=localStorage.getItem('kind')
+        }
         const onError= (error: AxiosError<ResourceError>) =>{
             if (error.response?.status===422){
                 Dialog.alert({
