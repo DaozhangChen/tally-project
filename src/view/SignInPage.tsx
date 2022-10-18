@@ -33,6 +33,7 @@ export const SignInPage=defineComponent({
             ]
             Object.assign(errors,validate(formData,rules))
             onSignIn().then((response)=>{return response},(error)=>{throw error})
+
         }
 
         const onSignIn=async ()=>{
@@ -43,7 +44,7 @@ export const SignInPage=defineComponent({
                  const response =await http.post<{jwt:string}>('/session',formData,{_autoLoading:true})
                      .catch(onError)
                     localStorage.setItem('jwt',response.data.jwt)
-                    router.push('/account')
+                     await router.push('/account')
                 }
             }
         }
@@ -63,7 +64,7 @@ export const SignInPage=defineComponent({
         return ()=>
             <MainLayout>{{
                 title:()=>'登录',
-                icon:()=><img src={comeback} alt='一个返回'/>,
+                icon:()=><img src={comeback} alt='一个返回' onClick={()=>{router.push('/start')}}/>,
                 default:()=>
                 <div>
                 <header class={s.headerIcon}>
