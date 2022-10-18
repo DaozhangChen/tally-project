@@ -11,7 +11,7 @@ export const ItemList = defineComponent({
             type: String as PropType<string|undefined>,
             required: true,
         },
-        id: Array
+        id: Array,
 
     },
     emits: ['update:id'],
@@ -49,6 +49,7 @@ export const ItemList = defineComponent({
                             <div class={Icon.value === item.sign ? s.selected : ''}
                                 onClick={selectIcon}
                                 id={item.id}
+                                 title={item.name}
                             >
                                 {item.sign}
                             </div>

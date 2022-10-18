@@ -35,14 +35,15 @@ export const StartAccount = defineComponent({
         const timeoutId=ref()
         const currentId=ref()
         const onTouchStart=(e:any)=>{
-            e.preventDefault()
-            console.log(e)
+
+            console.log(e.target.title)
             if (e.target.id===null||e.target.id===undefined||e.target.id===''){
                 return
             }
             currentId.value=e.target.id
             timeoutId.value=setTimeout(()=>{
-               router.push('/tagEdit')
+                e.preventDefault()
+               router.push(`/tagEdit?id=${e.target.id}&name=${e.target.title}&sign=${e.target.innerText}`)
             },800)
         }
         const onTouchMove=()=>{
@@ -51,6 +52,9 @@ export const StartAccount = defineComponent({
         const onTouchEnd=()=>{
             clearTimeout(timeoutId.value)
         }
+
+
+
 
         const onSubmit=async (e:Event)=>{
             e.preventDefault()
