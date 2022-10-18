@@ -5,8 +5,9 @@ import chart from '../assets/icons/charts.svg'
 import exports from '../assets/icons/export.svg'
 import notice from '../assets/icons/notice.svg'
 import {RouterLink} from "vue-router";
-import {http} from "./Http";
 import {meStore} from "../store/meStote";
+import 'vant/es/dialog/style'
+import {Dialog} from "vant";
 
 
 export const Sidebar=defineComponent({
@@ -21,6 +22,15 @@ export const Sidebar=defineComponent({
         onMounted( ()=>{
             me.value=useMeStore.mePromise
         })
+        const onExit=()=>{
+            Dialog.confirm({
+                title:'提示',
+                message:'您确定要退出吗？'
+            }).then(()=>{
+                localStorage.removeItem('jwt')
+                window.location.reload()
+            }).catch(()=>{return})
+        }
         return ()=>(
             <div class={s.wrapper}>
             <main class={s.mainBar}>
@@ -28,7 +38,7 @@ export const Sidebar=defineComponent({
                 {me.value ? (
                     <div>
                     <h1 class={s.emailText}>{useMeStore.meEmail}</h1>
-                    <p class={s.underUserText}>点击这里退出登录</p>
+                    <p class={s.underUserText} onClick={onExit}>点击这里退出登录</p>
                     </div>
                     )
                     :
