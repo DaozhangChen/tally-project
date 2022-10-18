@@ -12,12 +12,6 @@ export const Bill=defineComponent({
     },
 
     setup:(props,context)=> {
-        const billList =reactive({
-            sign:String,
-            name:String,
-            kind:String as PropType<'income'|'expenses'>,
-            amount:String as PropType<string|number>
-        })
         const resourceData=ref([])
         const getItem=reactive({
             page:1,
@@ -44,11 +38,6 @@ export const Bill=defineComponent({
                 await getBills()
             }
         },{immediate:true})
-
-
-
-
-
 
         return () => <div class={s.wrapper}>
             <div class={s.mainFlexClass}>

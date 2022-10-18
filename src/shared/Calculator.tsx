@@ -16,7 +16,6 @@ export const Calculator=defineComponent({
     emits:['update:amount','update:time'],
     setup:(props,context)=>{
         const refTime=ref(new Date().toISOString())
-        console.log(new Time())
 
         //计算器输入规则
         const appendText = (n: number | string) => {

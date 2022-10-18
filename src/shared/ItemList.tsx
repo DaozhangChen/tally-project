@@ -24,7 +24,6 @@ export const ItemList = defineComponent({
             const refId=ref<Array<string>>([])
             refId.value.push(e.target.id)
             context.emit('update:id', refId.value)
-            console.log(props.id)
         }
         watch(() => props.kind,
             async () => {

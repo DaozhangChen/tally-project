@@ -32,6 +32,26 @@ export const StartAccount = defineComponent({
             throw error
         }
 
+        const timeoutId=ref()
+        const currentId=ref()
+        const onTouchStart=(e:any)=>{
+            e.preventDefault()
+            console.log(e)
+            if (e.target.id===null||e.target.id===undefined||e.target.id===''){
+                return
+            }
+            currentId.value=e.target.id
+            timeoutId.value=setTimeout(()=>{
+               router.push('/tagEdit')
+            },800)
+        }
+        const onTouchMove=()=>{
+            clearTimeout(timeoutId.value)
+        }
+        const onTouchEnd=()=>{
+            clearTimeout(timeoutId.value)
+        }
+
         const onSubmit=async (e:Event)=>{
             e.preventDefault()
             const errors = reactive<FormErrors<typeof formData>>({ kind: [], tag_ids: [], amount: [], happen_at: [] })
@@ -71,7 +91,11 @@ export const StartAccount = defineComponent({
                                 <Tab text='支出' name='expenses' />
                                 <Tab text='收入' name='income' />
                             </Tabs>
-                            <div class={s.itemList}>
+                            <div class={s.itemList}
+                                 onTouchstart={onTouchStart}
+                                 onTouchend={onTouchEnd}
+                                 onTouchmove={onTouchMove}
+                            >
                                 <ItemList kind={formData.kind} v-model:id={formData.tag_ids}/>
                             </div>
                             <div>
