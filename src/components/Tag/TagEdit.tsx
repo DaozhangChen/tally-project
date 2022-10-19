@@ -16,7 +16,6 @@ export const TagEdit=defineComponent({
         const back=()=>{
             router.back()
         }
-        console.log(route.query.id)
         const deleteTag=()=>{
             Dialog.confirm({title:'提醒',message:`确定要删除吗？\n该标签对应的记账也会随之删除`})
                 .then(()=>{
@@ -34,12 +33,12 @@ export const TagEdit=defineComponent({
             <MainLayout>{{
                 title: () => '编辑标签',
                 icon: () => <img src={comeback} alt='一个返回' onClick={back}/>,
-                default: () =><>
+                default: () =><div onTouchstart={()=>{console.log('1111')}}>
                 <IconForm buttonType='edit'/>
                 <div class={s.upDeleteButton}>
                 <button class={s.deleteButton} onClick={deleteTag}>删除记账和标签</button>
                 </div>
-                </>
+                </div>
             }}</MainLayout>
         )
     }

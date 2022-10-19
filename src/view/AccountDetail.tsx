@@ -29,9 +29,6 @@ export const AccountDetail=defineComponent({
                 refShow.value = !refShow.value
             }
         }
-
-
-
         const showDatePicker=ref(false)
         const StartOrEnd=ref('start')
         const setStartTime=()=>{

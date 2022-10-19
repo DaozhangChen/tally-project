@@ -66,7 +66,6 @@ export const AnalysisMainPage=defineComponent({
                 name: item.tag.name,
                 value: item.amount
             }))
-
         })
         const betterData3 = computed<{ tag: Tag; amount: number; percent: number }[]>(() => {
             if (!data2.value) {return []}
@@ -142,7 +141,7 @@ export const AnalysisMainPage=defineComponent({
                         </select>
                     </div>
                 </div>
-                <div>
+                <div >
                     <LineChart data={betterData1.value}/>
                 </div>
                 <div>

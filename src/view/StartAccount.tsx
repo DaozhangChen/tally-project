@@ -49,8 +49,9 @@ export const StartAccount = defineComponent({
             timeoutId.value=setTimeout(()=>{
                 e.preventDefault()
                router.push(`/tagEdit?id=${e.target.id}&name=${e.target.title}&sign=${e.target.innerText}`)
-            },500)
+            },350)
         }
+
         const onTouchMove=()=>{
             clearTimeout(timeoutId.value)
         }
