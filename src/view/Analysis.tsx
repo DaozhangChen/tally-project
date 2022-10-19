@@ -6,16 +6,17 @@ import {AnalysisMainPage} from "../components/AnalysisPage/AnalysisMainPage";
 
 export const Analysis=defineComponent({
     setup:()=>{
-        return()=>(
+        return()=>
             <MainLayout>
                 {{
                     title:()=>'统计图表',
-                    icon:()=>()=><img src={back}/>,
-                    default:()=><>
-                    <AnalysisMainPage />
-                    </>
+                    icon:()=><img src={back}/>,
+                    default:()=>
+                        <div>
+                        <AnalysisMainPage />
+                        </div>
                 }}
             </MainLayout>
-        )
+
     }
 })

@@ -16,8 +16,5 @@ export const meStore=defineStore('me',{
             ,(error)=>{throw error})
 
         },
-        fetchMe() {
-           this.refreshMe()
-        },
     }
 })

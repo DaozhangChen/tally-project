@@ -1,3 +1,20 @@
 .wrapper{
+  padding: 16px;
+  overflow: scroll;
+}
 
+.selectClass {
+  font-size: 16px;
+
+  .spanText {
+    margin-right:20px;
+  }
+  select{
+    height: 35px;
+    width: 132px;
+    border-radius: 8px;
+    border-color: #5C33BE;
+    padding-left: 16px;
+    font-size: 16px;
+  }
 }
