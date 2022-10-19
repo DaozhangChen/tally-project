@@ -15,7 +15,6 @@ import {AxiosError} from "axios";
 export const StartAccount = defineComponent({
     setup: () => {
         const router = useRouter()
-        const route=useRoute()
         const back = () => { router.push('/start') }
         const formData=reactive<Partial<Item>>({
             kind: 'expenses',
@@ -24,7 +23,11 @@ export const StartAccount = defineComponent({
             happen_at:new Date().toISOString()
         })
         if (localStorage.getItem('kind')){
-            formData.kind=localStorage.getItem('kind')
+            if (localStorage.getItem('kind')!=='expenses'||localStorage.getItem('kind')!=='expenses'){
+                formData.kind='expenses'
+            }else {
+                formData.kind=localStorage.getItem('kind')
+            }
         }
         const onError= (error: AxiosError<ResourceError>) =>{
             if (error.response?.status===422){

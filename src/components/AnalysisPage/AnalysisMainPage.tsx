@@ -126,9 +126,6 @@ export const AnalysisMainPage=defineComponent({
             fetchData2()
         },{immediate:true})
 
-
-
-
         return()=>
             <div>
                 <Tabs v-model:selected={selected.value} onClick={controlShow}>
