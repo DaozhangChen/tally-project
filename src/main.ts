@@ -1,4 +1,4 @@
-import {createApp, ref} from 'vue'
+import {createApp, onMounted, ref} from 'vue'
 import {App} from "./App";
 import {createRouter} from "vue-router";
 import {history} from "./shared/history";
@@ -22,15 +22,8 @@ const whiteList: Record<string, 'exact' | 'startsWith'> = {
     '/sign_in': 'startsWith',
 }
 const useMeStore=meStore()
-const {mePromise}=storeToRefs(useMeStore)
-const meData=ref()
-const jwt=localStorage.getItem('jwt')
 
-if (jwt){
-    useMeStore.fetchMe()
-    meData.value=await mePromise.value
-    useMeStore.meEmail=meData.value.data.resource.email
-}
+useMeStore.refreshMe().then(()=>{return},()=>{return})
 
 router.beforeEach(async (to,from)=>{
     for (const key in whiteList){
@@ -43,10 +36,5 @@ router.beforeEach(async (to,from)=>{
         }
     }
 
-    useMeStore.fetchMe()
-    return mePromise.value.then(async ()=>{
-       meData.value= await mePromise.value
-        useMeStore.meEmail=meData.value.data.resource.email
-    },
-        ()=>'/sign_in?return_to=' + from.path)
+    return useMeStore.refreshMe().then(()=>{return},()=>'/sign_in?return_to=' + from.path)
 })

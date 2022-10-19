@@ -8,8 +8,13 @@ export const meStore=defineStore('me',{
         meEmail:undefined
     }),
     actions:{
-        refreshMe() {
-            this.mePromise = http.get('/me')
+        async refreshMe() {
+            await http.get('/me').then((response)=>{
+                this.mePromise=response
+                this.meEmail=this.mePromise.data.resource.email
+             }
+            ,(error)=>{throw error})
+
         },
         fetchMe() {
            this.refreshMe()

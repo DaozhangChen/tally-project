@@ -35,17 +35,19 @@ export const Sidebar=defineComponent({
             <div class={s.wrapper}>
             <main class={s.mainBar}>
             <div class={s.userTitle}>
-                {me.value ? (
+                {me.value ?
+                    (
                     <div>
-                    <h1 class={s.emailText}>{useMeStore.meEmail}</h1>
-                    <p class={s.underUserText} onClick={onExit}>点击这里退出登录</p>
+                        <h1 class={s.emailText}>{useMeStore.meEmail}</h1>
+                        <p class={s.underUserText} onClick={onExit}>点击这里退出登录</p>
                     </div>
                     )
                     :
-                    (   <div>
+                    (
+                    <div>
                         <h1 class={s.userText}>未登录用户</h1>
                         <p class={s.underUserText}>点击这里登录</p>
-                        </div>
+                    </div>
                     )
                 }
 
@@ -57,10 +59,12 @@ export const Sidebar=defineComponent({
                     <p>记账</p>
                 </li>
                 </RouterLink>
+                <RouterLink to='/analysis'>
                 <li>
                     <img src={chart} class={s.miniIcon}/>
                     <p>统计图表</p>
                 </li>
+                </RouterLink>
                 <li>
                     <img src={exports} class={s.miniIcon}/>
                     <p>导出数据</p>
