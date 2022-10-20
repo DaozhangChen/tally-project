@@ -22,6 +22,7 @@
   justify-content: space-between;
   padding: 0 16px 0 16px;
   height: calc(100vh - 202px - var(--startpage-header-text-height));
+  overflow: scroll;
 
 }
 
@@ -31,6 +32,8 @@
   color: #FFFFFF;
   border-radius: 10px;
   font-size: 18px;
-  position: relative;
-  bottom: 25%;
+  width: 100%;
+  padding: 15px;
+  margin-top: 80px;
+  margin-bottom: 60px;
 }
