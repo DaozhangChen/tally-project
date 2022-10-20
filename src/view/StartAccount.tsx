@@ -15,7 +15,7 @@ import {AxiosError} from "axios";
 export const StartAccount = defineComponent({
     setup: () => {
         const router = useRouter()
-        const back = () => { router.push('/start') }
+        const back = () => { router.push('/accountDetail') }
         const formData=reactive<Partial<Item>>({
             kind: 'expenses',
             tag_ids: undefined,

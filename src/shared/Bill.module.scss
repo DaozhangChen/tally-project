@@ -3,6 +3,7 @@
   height: calc(100vh - var(--startpage-header-text-height) - 40px - 100px);
   padding: 20px 20px 0 20px;
   overflow: scroll;
+  border:1px solid red;
 }
 
 .billBar{
@@ -48,4 +49,18 @@
 }
 .lastChild:last-child{
   margin-bottom:60px;
+}
+
+.buttonClass{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  .buttonMainClass{
+    background: #5C33BE;
+    color: #FFFFFF;
+    height: 40px;
+    width: 50%;
+    border-radius: 10px;
+  }
 }

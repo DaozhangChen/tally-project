@@ -20,7 +20,7 @@ export const routes:RouteRecordRaw[] = [
     {path:'/',redirect:'/welcome'},
     {path:'/welcome',component: AdvertisingPage,
         beforeEnter:(_to,_from,next)=>{
-            localStorage.getItem('skipFeatures')==='yes' ? next('/start') : next()
+            localStorage.getItem('skipFeatures')==='yes' ? next('/accountDetail') : next()
         },
         children:[
         {path:'',redirect:'/welcome/1'},
