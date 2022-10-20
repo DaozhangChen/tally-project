@@ -33,7 +33,7 @@ export const TagEdit=defineComponent({
             <MainLayout>{{
                 title: () => '编辑标签',
                 icon: () => <img src={comeback} alt='一个返回' onClick={back}/>,
-                default: () =><div onTouchstart={()=>{console.log('1111')}}>
+                default: () =><div>
                 <IconForm buttonType='edit'/>
                 <div class={s.upDeleteButton}>
                 <button class={s.deleteButton} onClick={deleteTag}>删除记账和标签</button>

@@ -65,14 +65,18 @@ export const Sidebar=defineComponent({
                     <p>统计图表</p>
                 </li>
                 </RouterLink>
+                <RouterLink to='/export'>
                 <li>
                     <img src={exports} class={s.miniIcon}/>
                     <p>导出数据</p>
                 </li>
+                </RouterLink>
+                <RouterLink to='remind'>
                 <li>
                     <img src={notice} class={s.miniIcon}/>
                     <p>记账提醒</p>
                 </li>
+                </RouterLink>
             </ul>
             </main>
             <div class={s.mask} onClick={props.onClose}/>
