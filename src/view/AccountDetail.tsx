@@ -8,7 +8,8 @@ import {Bill} from "../shared/Bill";
 import {Time} from "../shared/time";
 import 'vant/es/popup/style'
 import 'vant/es/datetime-picker/style'
-import {DatetimePicker, Popup} from "vant";
+import 'vant/es/dialog/style'
+import {DatetimePicker, Dialog, Popup} from "vant";
 import s from './AccountDetail.module.scss'
 import {selectTime} from "../shared/selectTime";
 
@@ -26,7 +27,11 @@ export const AccountDetail=defineComponent({
         const refShow=ref<boolean>(false)
         const controlShow=()=>{
             if (selected.value==='anyTime'){
-                refShow.value = !refShow.value
+               Dialog.alert({
+                   message:'若需要查看当天记账，\n选择结束时间需往后一天'
+               }).then(()=>{
+                   refShow.value = !refShow.value
+               })
             }
         }
         const showDatePicker=ref(false)
@@ -43,7 +48,7 @@ export const AccountDetail=defineComponent({
             if (StartOrEnd.value==='start'){
                 StartEndTime.startTime=new Time(date)
             }else if (StartOrEnd.value==='end'){
-                StartEndTime.endTime=new Time(date)
+                StartEndTime.endTime=new Time(date).lastHourOfDay()
             }
             showDatePicker.value=false
         }
