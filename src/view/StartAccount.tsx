@@ -84,7 +84,10 @@ export const StartAccount = defineComponent({
             }).then(()=>{
                 Toast.success('记账成功')
             },()=>{onError})
-            router.push('/start')
+            setTimeout(()=>{
+                router.push('/accountDetail')
+            },1000)
+
         }
         return () => (
             <MainLayout>
