@@ -2,7 +2,7 @@ import {defineComponent, PropType, reactive} from "vue";
 import {IconList} from "./IconList";
 import {hasError, Rules, validate} from "./validate";
 import s from './IconForm.module.scss'
-import {routerKey, useRoute, useRouter} from "vue-router";
+import {RouteLocationNormalizedLoaded, routerKey, useRoute, useRouter} from "vue-router";
 import {http} from "./Http";
 import 'vant/es/toast/style'
 import { Toast} from "vant";
@@ -19,11 +19,11 @@ export const IconForm =defineComponent({
         const formData = reactive<Partial<Tag>>({
             name: '',
             sign: '',
-            kind:route.query.kind
+            kind:route.query.kind as  "expenses" | "income"
         })
         if (route.query.id){
-            formData.name=route.query.name
-            formData.sign=route.query.sign
+            formData.name=route.query.name as string
+            formData.sign=route.query.sign as string
         }
         const errors = reactive<FormErrors<typeof formData>>({})
         const onSubmit = (e: Event) => {

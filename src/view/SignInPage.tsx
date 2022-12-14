@@ -12,8 +12,8 @@ export const SignInPage=defineComponent({
     setup:()=>{
         const router=useRouter()
         const formData=reactive({
-            email:'',
-            code:'',
+            email:'1205308740@qq.com',
+            code:'123456',
         })
         const errors=reactive({
             email:[],

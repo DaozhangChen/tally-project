@@ -22,12 +22,9 @@ export const StartAccount = defineComponent({
             amount:0,
             happen_at:new Date().toISOString()
         })
-        if (localStorage.getItem('kind')){
-            if (localStorage.getItem('kind')!=='expenses'||localStorage.getItem('kind')!=='expenses'){
-                formData.kind='expenses'
-            }else {
-                formData.kind=localStorage.getItem('kind')
-            }
+        if (localStorage.getItem('kind') && (localStorage.getItem('kind') === 'expenses' || localStorage.getItem('kind') === 'income')) {
+            // @ts-ignore
+            formData.kind = localStorage.getItem('kind')
         }
         const onError= (error: AxiosError<ResourceError>) =>{
             if (error.response?.status===422){

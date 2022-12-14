@@ -3,7 +3,32 @@ import s from './Bill.module.scss'
 import {Time} from "./time";
 import {http} from "./Http";
 import {count} from "echarts/types/src/component/dataZoom/history";
+import {AxiosResponse} from "axios";
 
+
+type Resources={
+    amount:number,
+    created_at:string,
+    deleted_at:null|string,
+    happen_at:string,
+    id:number,
+    kind:'expenses'|'income',
+    tag_ids:number[],
+    tags:any[],
+    updated_at:string,
+    user_id:number
+}
+interface billList{
+    resources:Resources[],
+    pager:{
+        count:number,
+        page:string,
+        per_page:number
+    }
+
+
+
+}
 export const Bill=defineComponent({
     props:{
         selected:String,
@@ -13,7 +38,7 @@ export const Bill=defineComponent({
     },
 
     setup:(props,context)=> {
-        const resourceData=ref([])
+        const resourceData=ref<Resources[]>([])
         const hasMore=ref<boolean>(false)
         const getItem=reactive({
             page:1,
@@ -24,7 +49,7 @@ export const Bill=defineComponent({
         const getBills=async ()=>{
             getItem.happen_after=props.startTime!.format()
             getItem.happen_before=props.endTime!.format()
-            const response = await http.get('/items',getItem,{_autoLoading:true})
+            const response:AxiosResponse<billList> = await http.get('/items',getItem,{_autoLoading:true})
             const {resources,pager}=response.data
             resourceData.value.push(...resources)
             if (pager.count===25){
@@ -72,7 +97,6 @@ export const Bill=defineComponent({
                         :
                         <div>暂无更多记账</div>
                     }
-
                 </div>
             </div>
         </div>

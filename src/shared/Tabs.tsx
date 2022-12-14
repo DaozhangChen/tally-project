@@ -22,7 +22,9 @@ export const Tabs=defineComponent({
                         <li class={(props.selected===item.props?.name) ?  [s.normal,s.selected]: s.normal}
                             onClick={()=>{
                                 context.emit('update:selected',item.props?.name)
-                                localStorage.setItem('kind',item.props?.name)
+                                 if(item.props?.name==="income" || item.props?.name ==="expenses") {
+                                     localStorage.setItem('kind', item.props?.name)
+                                 }
                             }}
                         >
                             {item.props?.text}
