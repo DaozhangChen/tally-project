@@ -15,12 +15,6 @@
   justify-items: stretch;
 }
 
-.mask{
-  width: 30vw;
-  background:rgba(0,0,0,0.7);
-  z-index: var(--sidebar-mask-z-index);
-}
-
 .userTitle{
   background: var(--main-color);
   padding: 32px 0 44px 16px;

@@ -79,7 +79,6 @@ export const Sidebar=defineComponent({
                 </RouterLink>
             </ul>
             </main>
-            <div class={s.mask} onClick={props.onClose}/>
             </div>
         )
     }
