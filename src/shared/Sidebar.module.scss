@@ -22,7 +22,7 @@
 }
 
 .userTitle{
-  background: #5C33BE;
+  background: var(--main-color);
   padding: 32px 0 44px 16px;
   height:14vh;
 
@@ -39,7 +39,7 @@
   }
   .underUserText{
     margin-top: 12px;
-    color:#CEA1FF ;
+    color:#47A3FF ;
     font-size: 16px;
   }
 }

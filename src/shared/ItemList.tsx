@@ -1,14 +1,25 @@
 import {computed, defineComponent, nextTick, onMounted, onUpdated, PropType, reactive, ref, watch} from "vue";
-import purpleAdd from '../assets/icons/addpurple.svg'
+import purpleAdd from '../assets/icons/addblue.svg'
 import s from './ItemList.module.scss'
 import { useRoute, useRouter } from "vue-router";
 import { http } from "./Http";
 import { useTags } from "./useTags";
 
+
+type Resources={
+    created_at:string,
+    deleted_at:null|string,
+    id:number,
+    kind:'expenses'|'income',
+    name:string,
+    sign:string,
+    updated_at:string,
+    user_id:number
+}
 export const ItemList = defineComponent({
     props: {
         kind: {
-            type: String as PropType<string|undefined>,
+            type: String,
             required: true,
         },
         id: Array,
@@ -17,7 +28,7 @@ export const ItemList = defineComponent({
     emits: ['update:id'],
     setup: (props, context) => {
         const router = useRouter()
-        const tags = ref([])
+        const tags = ref<Resources[]>([])
         const Icon = ref()
         const selectIcon = (e: any) => {
             Icon.value = e.target.innerText
@@ -27,15 +38,13 @@ export const ItemList = defineComponent({
         }
         watch(() => props.kind,
             async () => {
-                const value = await useTags(props.kind, 1)
+                const value= await useTags(props.kind, 1)
                 const { resources } = value
+                console.log(resources)
                 tags.value.length = 0
                 tags.value.push(...resources)
             }, { immediate: true }
         )
-
-
-
 
         return () => (
             <div class={s.wrapper}>
@@ -48,7 +57,7 @@ export const ItemList = defineComponent({
                         <div>
                             <div class={Icon.value === item.sign ? s.selected : ''}
                                 onClick={selectIcon}
-                                id={item.id}
+                                id={item.id.toString()}
                                  title={item.name}
                             >
                                 {item.sign}

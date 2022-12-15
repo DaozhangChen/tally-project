@@ -18,7 +18,7 @@ type Resources={
     updated_at:string,
     user_id:number
 }
-interface billList{
+ interface billList{
     resources:Resources[],
     pager:{
         count:number,

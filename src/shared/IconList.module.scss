@@ -11,7 +11,7 @@
 
 .mainListClass{
   margin-top: 10px;
-  border: 1px solid #5C33BE;
+  border: 1px solid var(--main-color);
   height: calc(100% - 20px - 11px - 30px);
   border-radius: 10px;
   padding: 13px 12px;
@@ -52,7 +52,7 @@
     flex-grow: 0;
   }
   .selectIcon{
-    outline: 1px solid black;
+    outline: 2px solid black;
     border-radius: 5px;
 
   }
