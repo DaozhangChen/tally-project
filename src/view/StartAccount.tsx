@@ -42,7 +42,6 @@ export const StartAccount = defineComponent({
             if (e.target.id===null||e.target.id===undefined||e.target.id===''){
                 return
             }
-            console.log(e.target)
             isLongPress.value=setTimeout(()=>{
                 console.log('isLongPress')
                 longPressIcon.value=e.target.id
@@ -51,7 +50,7 @@ export const StartAccount = defineComponent({
             timeoutId.value=setTimeout(()=>{
                 e.preventDefault()
                router.push(`/tagEdit?id=${e.target.id}&name=${e.target.title}&sign=${e.target.innerText}`)
-            },350)
+            },3500)
         }
 
         const onTouchMove=()=>{

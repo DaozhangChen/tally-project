@@ -55,7 +55,7 @@ export const IconForm =defineComponent({
                         setTimeout(()=>{
                             router.back()
                         },1000)
-                    },(error)=>{throw error})
+                    },(error:Error)=>{throw error})
                 }
 
             }

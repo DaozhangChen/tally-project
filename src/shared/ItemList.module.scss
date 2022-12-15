@@ -21,13 +21,24 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 0px;
+      margin-top: 0;
       background: #EFEFEF;
 
     }
     .selected{
       border: 2px solid var(--main-color);
     }
+    .inLongPress {
+      animation: zoomOut 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
   }
 }
 
+@keyframes zoomOut {
+0%{
+  transform: scale(1.5);
+}
+  100%{
+    transform: scale(0.1);
+  }
+}
