@@ -43,11 +43,6 @@ export const ItemList = defineComponent({
                 tags.value.push(...resources)
             }, { immediate: true }
         )
-        watch(()=>props.longPress,()=>{
-            console.log(typeof props.longPress)
-        })
-
-
 
         return () => (
             <div class={s.wrapper}>

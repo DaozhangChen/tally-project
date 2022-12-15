@@ -8,9 +8,6 @@ import { IconForm } from "../../shared/IconForm";
 export const TagCreatePage = defineComponent({
     setup: (props, context) => {
         const router = useRouter()
-        const route = useRoute()
-
-        console.log(route.query.kind)
         return () => (
             <MainLayout>{{
                 title: () => '新建标签',

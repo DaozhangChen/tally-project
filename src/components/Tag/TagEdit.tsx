@@ -1,4 +1,4 @@
-import {defineComponent} from "vue";
+import {defineComponent, onMounted} from "vue";
 import comeback from "../../assets/icons/comeback.svg";
 import {MainLayout} from "../../shared/MainLayout";
 import {useRoute, useRouter} from "vue-router";
@@ -29,6 +29,15 @@ export const TagEdit=defineComponent({
                 })
                 .catch(()=>{return})
         }
+        onMounted(()=>{
+            Toast.loading({
+                message:'加载中',
+                forbidClick:true
+            })
+            setTimeout(()=>{
+                Toast.clear()
+            },500)
+        })
         return ()=>(
             <MainLayout>{{
                 title: () => '编辑标签',

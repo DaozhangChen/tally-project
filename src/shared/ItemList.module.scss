@@ -29,16 +29,19 @@
       border: 2px solid var(--main-color);
     }
     .inLongPress {
-      animation: zoomOut 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      animation: zoomOut 0.8s cubic-bezier(0.75, 0, 0.62, 1) both;
     }
   }
 }
 
 @keyframes zoomOut {
 0%{
+  background: #EFEFEF;
+
   transform: scale(1.5);
 }
   100%{
+    background: #47A3FF;
     transform: scale(0.1);
   }
 }
