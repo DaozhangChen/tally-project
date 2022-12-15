@@ -1,5 +1,4 @@
 import {defineComponent} from "vue";
-import menu from '../assets/icons/menu.svg'
 import pig from '../assets/icons/pig.svg'
 import s from './StartPage.module.scss'
 import {MainLayout} from "../shared/MainLayout";
