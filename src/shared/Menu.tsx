@@ -8,15 +8,13 @@ export const Menu=defineComponent({
         const openSidebar=()=>{refSidebarOpen.value = !refSidebarOpen.value}
         const refSidebarOpen=ref(false)
         return ()=>(
-             <div>
-                 <div onClick={openSidebar}>
-                 <img src={menu} alt='一个菜单' class={s.titleIcon}/>
-                 </div>
+             <>
+                 <img src={menu} alt='一个菜单' class={s.titleIcon} onClick={openSidebar}/>
                  <div >
                      {refSidebarOpen.value && (
                          <Sidebar onClose={()=>refSidebarOpen.value=false}/>)}
                  </div>
-             </div>
+             </>
         )
     }
 })

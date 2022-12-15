@@ -1,5 +1,5 @@
 .wrapper{
-  background: #8F4CD6;
+  background: var(--main-color);
   color: #FFFFFF;
 }
 .tabClass{
@@ -31,6 +31,6 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: #C8B1FF;
+    background: #47A3FF;
   }
 }
