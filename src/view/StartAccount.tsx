@@ -1,4 +1,4 @@
-import {defineComponent, reactive, ref, watch} from "vue";
+import {defineComponent, onMounted, reactive, ref, watch} from "vue";
 import { MainLayout } from "../shared/MainLayout";
 import comeback from '../assets/icons/comeback.svg'
 import s from './StartAccount.module.scss'
@@ -92,8 +92,18 @@ export const StartAccount = defineComponent({
             setTimeout(()=>{
                 router.push('/accountDetail')
             },1000)
-
         }
+        onMounted(()=>{
+            if(localStorage.getItem('fistTime')){
+                return
+            }else {
+                Dialog.alert({
+                    message: '长按标签图标，即可进入编辑页面',
+                }).then(() => {
+                    localStorage.setItem('fistTime','true')
+                });
+            }
+        })
         // @ts-ignore
         return () => (
             <MainLayout>
