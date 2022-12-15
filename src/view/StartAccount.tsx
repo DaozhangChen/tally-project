@@ -36,12 +36,18 @@ export const StartAccount = defineComponent({
         }
 
         const timeoutId=ref()
-        const currentId=ref()
+        const isLongPress=ref()
+        const longPressIcon=ref()
         const onTouchStart=(e:any)=>{
             if (e.target.id===null||e.target.id===undefined||e.target.id===''){
                 return
             }
-            currentId.value=e.target.id
+            console.log(e.target)
+            isLongPress.value=setTimeout(()=>{
+                console.log('isLongPress')
+                longPressIcon.value=e.target.id
+            },150)
+
             timeoutId.value=setTimeout(()=>{
                 e.preventDefault()
                router.push(`/tagEdit?id=${e.target.id}&name=${e.target.title}&sign=${e.target.innerText}`)
@@ -49,9 +55,14 @@ export const StartAccount = defineComponent({
         }
 
         const onTouchMove=()=>{
+            clearTimeout(isLongPress.value)
+            longPressIcon.value=null
             clearTimeout(timeoutId.value)
+
         }
         const onTouchEnd=()=>{
+            clearTimeout(isLongPress.value)
+            longPressIcon.value=null
             clearTimeout(timeoutId.value)
         }
 
@@ -102,7 +113,7 @@ export const StartAccount = defineComponent({
                                  onTouchend={onTouchEnd}
                                  onTouchmove={onTouchMove}
                             >
-                                <ItemList kind={formData.kind||'expenses'} v-model:id={formData.tag_ids}/>
+                                <ItemList kind={formData.kind||'expenses'} v-model:id={formData.tag_ids} longPress={longPressIcon.value}/>
                             </div>
                             <div>
                                 <Calculator v-model:amount={formData.amount}

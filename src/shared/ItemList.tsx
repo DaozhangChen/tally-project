@@ -1,4 +1,4 @@
-import {defineComponent ,ref, watch} from "vue";
+import {defineComponent, onMounted, ref, watch} from "vue";
 import purpleAdd from '../assets/icons/addblue.svg'
 import s from './ItemList.module.scss'
 import {  useRouter } from "vue-router";
@@ -22,6 +22,7 @@ export const ItemList = defineComponent({
             required: true,
         },
         id: Array,
+        longPress:String
 
     },
     emits: ['update:id'],
@@ -30,11 +31,12 @@ export const ItemList = defineComponent({
         const tags = ref<Resources[]>([])
         const Icon = ref()
         const selectIcon = (e: any) => {
-            Icon.value = e.target.innerText
+            Icon.value = e.target.id
             const refId=ref<Array<string>>([])
             refId.value.push(e.target.id)
             context.emit('update:id', refId.value)
         }
+
         watch(() => props.kind,
             async () => {
                 const value= await useTags(props.kind, 1)
@@ -53,7 +55,7 @@ export const ItemList = defineComponent({
                     </div>
                     {tags.value.map(item =>
                         <div>
-                            <div class={Icon.value === item.sign ? s.selected : ''}
+                            <div class={`${Number(Icon.value) === item.id ? s.selected : ''} ${''}`}
                                 onClick={selectIcon}
                                 id={item.id.toString()}
                                  title={item.name}
