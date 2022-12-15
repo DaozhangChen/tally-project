@@ -5,12 +5,11 @@ import s from './StartAccount.module.scss'
 import { Calculator } from "../shared/Calculator";
 import { ItemList } from "../shared/ItemList";
 import { Tab, Tabs } from "../shared/Tabs";
-import {useRoute, useRouter} from "vue-router";
+import {useRouter} from "vue-router";
 import {http} from "../shared/Http";
 import {hasError, Rules, validate} from "../shared/validate";
 import 'vant/es/dialog/style'
 import {Dialog, Toast} from "vant";
-import {AxiosError} from "axios";
 
 export const StartAccount = defineComponent({
     setup: () => {
@@ -26,7 +25,7 @@ export const StartAccount = defineComponent({
             // @ts-ignore
             formData.kind = localStorage.getItem('kind')
         }
-        const onError= (error: AxiosError<ResourceError>) =>{
+        const onError= (error: any) =>{
             if (error.response?.status===422){
                 Dialog.alert({
                     title:'出错',

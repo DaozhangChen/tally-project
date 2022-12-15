@@ -1,7 +1,6 @@
 import {defineComponent} from "vue";
 import {MainLayout} from "../shared/MainLayout";
 import back from '../assets/icons/comeback.svg'
-import s from './Analysis.module.scss'
 import {AnalysisMainPage} from "../components/AnalysisPage/AnalysisMainPage";
 import {useRouter} from "vue-router";
 

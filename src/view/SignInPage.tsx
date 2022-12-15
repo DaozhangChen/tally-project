@@ -57,7 +57,7 @@ export const SignInPage=defineComponent({
         }
         const onSendValidateCode=async ()=>{
             await http.post('/validation_codes',{email:formData.email},{_autoLoading:true})
-                .catch(error=>{onError(error)})
+                .catch((error:any)=>{onError(error)})
             startCount.value.startCount()
         }
 

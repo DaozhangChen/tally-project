@@ -1,8 +1,7 @@
-import {computed, defineComponent, nextTick, onMounted, onUpdated, PropType, reactive, ref, watch} from "vue";
+import {defineComponent ,ref, watch} from "vue";
 import purpleAdd from '../assets/icons/addblue.svg'
 import s from './ItemList.module.scss'
-import { useRoute, useRouter } from "vue-router";
-import { http } from "./Http";
+import {  useRouter } from "vue-router";
 import { useTags } from "./useTags";
 
 

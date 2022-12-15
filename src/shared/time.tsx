@@ -52,9 +52,6 @@ export class Time{
     lastHourOfDay(){
         return new Time(new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), 23, 59, 59))
     }
-    getRaw() {
-        return this.date.getTime()
-    }
     getTimestamp() {
         return this.date.valueOf()
     }
