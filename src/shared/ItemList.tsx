@@ -39,7 +39,6 @@ export const ItemList = defineComponent({
             async () => {
                 const value= await useTags(props.kind, 1)
                 const { resources } = value
-                console.log(resources)
                 tags.value.length = 0
                 tags.value.push(...resources)
             }, { immediate: true }

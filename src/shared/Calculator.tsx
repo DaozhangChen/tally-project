@@ -80,7 +80,6 @@ export const Calculator=defineComponent({
         const hideDatePicker=()=>refShow.value=false
 
         const setTime=(date:Date)=>{
-            console.log(refTime.value)
             context.emit('update:time',date.toISOString())
             hideDatePicker()
         }

@@ -24,7 +24,6 @@ export const validate=function (formData:FData,rules:Rules){
             case 'required':
                 if (isEmpty(value)) {
                     errors[key] = errors[key] ?? []
-                    console.log('1111')
                     errors[key]?.push(message)
                 }
                 break;
