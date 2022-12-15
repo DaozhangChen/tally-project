@@ -67,7 +67,7 @@ export const AccountDetail=defineComponent({
 
         return () => (
             <MainLayout>{{
-                title: () => '山竹记账',
+                title: () => '深蓝记账',
                 icon: () => <Menu/>,
                 default: () =>
                     { return <div>

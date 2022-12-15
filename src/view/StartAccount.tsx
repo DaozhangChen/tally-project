@@ -86,6 +86,7 @@ export const StartAccount = defineComponent({
             },1000)
 
         }
+        // @ts-ignore
         return () => (
             <MainLayout>
                 {{
@@ -102,7 +103,7 @@ export const StartAccount = defineComponent({
                                  onTouchend={onTouchEnd}
                                  onTouchmove={onTouchMove}
                             >
-                                <ItemList kind={formData.kind} v-model:id={formData.tag_ids}/>
+                                <ItemList kind={formData.kind||'expenses'} v-model:id={formData.tag_ids}/>
                             </div>
                             <div>
                                 <Calculator v-model:amount={formData.amount}

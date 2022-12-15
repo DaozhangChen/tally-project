@@ -1,7 +1,7 @@
 import {defineComponent, reactive, ref} from "vue";
 import {MainLayout} from "../shared/MainLayout";
 import comeback from "../assets/icons/comeback.svg";
-import mangosteen from '../assets/icons/mangosteen.svg'
+import lobster from  '../assets/icons/lobster.svg'
 import s from './SignInPage.module.scss'
 import {FormItem} from "../shared/FormItem";
 import {Rules, validate} from "../shared/validate";
@@ -68,8 +68,8 @@ export const SignInPage=defineComponent({
                 default:()=>
                 <div>
                 <header class={s.headerIcon}>
-                    <img src={mangosteen} alt='一个山竹'/>
-                    <h1>山竹记账</h1>
+                    <img src={lobster} alt='一只龙虾'/>
+                    <h1>深蓝记账</h1>
                 </header>
                     <form class={s.mainClass} onSubmit={onSubmit}>
                         <FormItem type='sign_in'

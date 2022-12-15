@@ -21,7 +21,7 @@ export const StartPage=defineComponent({
                 <MainLayout>
                     {{
                         icon:()=><Menu />,
-                        title:()=>'山竹记账',
+                        title:()=>'深蓝记账',
                         default:()=>
                             <div>
                                 <main class={s.bodyText}>

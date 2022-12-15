@@ -1,7 +1,7 @@
 import {defineComponent, Transition, VNode} from "vue";
 import {RouteLocationNormalizedLoaded, RouterView} from "vue-router";
-import mangosteen from '../assets/mangosteen.svg'
 import s from './AdvertisingPage.module.scss'
+import lobster from  '../assets/icons/lobster.svg'
 
 export const AdvertisingPage=defineComponent({
     setup:()=>{
@@ -12,8 +12,8 @@ export const AdvertisingPage=defineComponent({
             <>
             <div class={s.wrapper}>
             <header class={s.title}>
-                <img src={mangosteen} alt='一个山竹' class={s.icon}/>
-                <h1 class={s.titleText}>山竹记账</h1>
+                <img src={lobster} alt='一只龙虾' class={s.icon}/>
+                <h1 class={s.titleText}>深蓝记账</h1>
             </header>
             <main class={s.bodyText}>
               <RouterView name='main'>

@@ -13,7 +13,7 @@ export const textPage=defineComponent({
             <MainLayout>
                 {{
                     icon:()=><img src={menu} alt='一个菜单' class={s.titleIcon}/>,
-                    title:()=>'山竹记账',
+                    title:()=>'深蓝记账',
                     default:()=>
                         <div>
                         <main class={s.bodyText}>
