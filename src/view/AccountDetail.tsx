@@ -117,3 +117,5 @@ export const AccountDetail=defineComponent({
         )
     }
 })
+
+export default AccountDetail

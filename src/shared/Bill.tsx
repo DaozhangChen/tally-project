@@ -2,8 +2,6 @@ import {defineComponent, PropType, reactive, ref, watch} from "vue";
 import s from './Bill.module.scss'
 import {Time} from "./time";
 import {http} from "./Http";
-import {count} from "echarts/types/src/component/dataZoom/history";
-import {AxiosResponse} from "axios";
 
 
 type Resources={
@@ -49,7 +47,7 @@ export const Bill=defineComponent({
         const getBills=async ()=>{
             getItem.happen_after=props.startTime!.format()
             getItem.happen_before=props.endTime!.format()
-            const response:AxiosResponse<billList> = await http.get('/items',getItem,{_autoLoading:true})
+            const response = await http.get('/items',getItem,{_autoLoading:true})
             const {resources,pager}=response.data
             resourceData.value.push(...resources)
             if (pager.count===25){

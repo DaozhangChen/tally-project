@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { http } from "./Http";
 
 
@@ -22,7 +21,7 @@ interface billList{
 }
 
 export const useTags = async (kind: string, page: number) => {
-    const response: AxiosResponse<billList> = await http.get('/tags', {
+    const response = await http.get('/tags', {
         kind: kind,
         page: page
     },{_autoLoading:true})

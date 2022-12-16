@@ -34,14 +34,14 @@ export const AnalysisMainPage=defineComponent({
         }
 
         const formData1=reactive({
-            happen_after:String,
-            happen_before:String,
+            happen_after:'',
+            happen_before:'',
             kind:kind.value,
             group_by:'happen_at'
         })
         const formData2=reactive({
-            happen_after:String,
-            happen_before:String,
+            happen_after:'',
+            happen_before:'',
             kind:kind.value,
             group_by:'tag_id'
         })
@@ -54,7 +54,9 @@ export const AnalysisMainPage=defineComponent({
             const n = diff / DAY + 1
             return Array.from({ length: n }).map((_, i) => {
                 const time = new Time(formData1.happen_after + 'T00:00:00.000+0800').add(i, 'day').getTimestamp()
+                // @ts-ignore
                 const item = data1.value[0]
+                // @ts-ignore
                 const amount = item && new Date(item.happen_at + 'T00:00:00.000+0800').getTime() === time ? data1.value.shift()!.amount : 0
                 return [new Date(time).toISOString(), amount]
             })
@@ -85,7 +87,8 @@ export const AnalysisMainPage=defineComponent({
             data2.value = response.data.groups
         }
         const dataReplace=()=>{
-            const {startTime,endTime} = selectTime(selected.value)
+            // @ts-ignore
+                const {startTime,endTime} = selectTime(selected.value)
             formData1.happen_after =startTime.format()
             formData1.happen_before=endTime.format()
             formData2.happen_after =startTime.format()
@@ -135,7 +138,8 @@ export const AnalysisMainPage=defineComponent({
                 <div class={s.wrapper}>
                     <div class={s.selectClass}>
                         <span class={s.spanText}>类型</span>
-                        <select onChange={(e)=>{kind.value=e.target.value}}>
+                        <select onChange={(e)=>{ // @ts-ignore
+                            kind.value=e.target?.value}}>
                             <option value='expenses'>支出</option>
                             <option value='income'>收入</option>
                         </select>

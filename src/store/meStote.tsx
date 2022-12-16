@@ -1,6 +1,5 @@
 import {defineStore} from "pinia";
 import {http} from "../shared/Http";
-import {AxiosResponse} from "axios";
 
 type meResponse = {
     resource:{
@@ -13,7 +12,7 @@ type meResponse = {
 }
 type meState={
     me:undefined|string,
-    mePromise:undefined|AxiosResponse<meResponse>,
+    mePromise:undefined|any,
     meEmail:undefined|string
 
 }
@@ -25,10 +24,12 @@ export const meStore=defineStore('me',{
     }),
     actions:{
         async refreshMe() {
+            // @ts-ignore
             await http.get('/me').then((response:AxiosResponse)=>{
                     this.mePromise = response
                     this.meEmail = this.mePromise.data.resource.email
              }
+             //@ts-ignore
             ,(error)=>{throw error})
         },
     }

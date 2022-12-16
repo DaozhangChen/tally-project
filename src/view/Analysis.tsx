@@ -21,3 +21,5 @@ export const Analysis=defineComponent({
 
     }
 })
+
+export default Analysis

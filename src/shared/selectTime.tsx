@@ -1,9 +1,8 @@
 import {Time} from "./time";
 import {ref} from "vue";
 
-type timeKind=string
 
-export const selectTime=(timeKind:timeKind)=>{
+export const selectTime=(timeKind:string)=>{
     const refTime=new Time()
     const startTime=ref<Time>()
     const endTime=ref<Time>()

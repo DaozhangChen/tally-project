@@ -19,3 +19,5 @@ export const TagCreatePage = defineComponent({
 
     }
 })
+
+export default TagCreatePage

@@ -38,3 +38,5 @@ export const AdvertisingPage=defineComponent({
         )
     }
 })
+
+export default AdvertisingPage

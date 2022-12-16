@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig} from "axios";
 import 'vant/es/toast/style'
 import {Toast} from "vant";
 
@@ -8,8 +8,9 @@ type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
 type DeleteConfig = Omit<AxiosRequestConfig, 'params'>
 
 export class Http {
-    instance: AxiosInstance
+    instance
     constructor(baseURL: string) {
+        // @ts-ignore
         this.instance = axios.create({ baseURL })
     }
     get<R = unknown>(url: string, query?: Record<string, JSONValue>, config?: GetConfig) {
@@ -26,8 +27,9 @@ export class Http {
     }
 }
 
-export const http = new Http('api/v1')
+export const http = new Http('http://121.196.236.94:3000/api/v1')
 
+// @ts-ignore
 http.instance.interceptors.request.use(config => {
     const jwt = localStorage.getItem('jwt')
     if (jwt) {
@@ -42,11 +44,14 @@ http.instance.interceptors.request.use(config => {
     return config
 })
 
+
+// @ts-ignore
 http.instance.interceptors.response.use(response => {
     if (response.config._autoLoading===true){
         Toast.clear()
     }
     return response
+    // @ts-ignore
 },(error)=>{
     if (error.config._autoLoading===true){
         Toast.clear()

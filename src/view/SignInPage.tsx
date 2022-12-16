@@ -85,3 +85,5 @@ export const SignInPage=defineComponent({
             }}</MainLayout>
     }
 })
+
+export default SignInPage

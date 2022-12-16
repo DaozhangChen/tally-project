@@ -136,3 +136,5 @@ export const StartAccount = defineComponent({
         )
     }
 })
+
+export default StartAccount
