@@ -24,7 +24,7 @@
   width: 80vw;
   height: 365px;
   font-size: 18px;
-
+  border: 1px solid red;
 
   .title {
     height: 52px;
@@ -33,6 +33,7 @@
     display: flex;
     padding: 16px;
     align-items: center;
+
   }
 
   .startTime {
