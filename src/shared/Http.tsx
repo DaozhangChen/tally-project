@@ -29,6 +29,7 @@ export class Http {
 
 export const http = new Http('http://121.196.236.94:3000/api/v1')
 
+
 // @ts-ignore
 http.instance.interceptors.request.use(config => {
     const jwt = localStorage.getItem('jwt')
